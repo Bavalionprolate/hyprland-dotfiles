@@ -3,7 +3,7 @@
     "layer": "top", // Waybar at top layer
     "modules-left": ["custom/launcher", "cpu", "memory", "wlr/workspaces"],
     "modules-center" : ["clock"],
-    "modules-right": ["tray", "network", "pulseaudio",  "backlight", "battery", "custom/lock", "custom/power-menu"],
+    "modules-right": ["tray", "hyprland/language", "network", "pulseaudio",  "backlight", "battery", "custom/lock", "custom/power-menu"],
     "wlr/workspaces": {
       "format": "{icon}",
       "on-click": "activate",
@@ -14,6 +14,9 @@
     },
     "hyprland/window": {
         "format": "{}"
+    },
+    "hyprland/language": {
+        "format": "{short} {variant}",
     },
     "tray": {
         "spacing": 10
