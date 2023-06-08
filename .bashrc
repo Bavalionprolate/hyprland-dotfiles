@@ -6,5 +6,14 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
-#PS1='[\u@\h \W]\$ '
-PS1='🥝 \W \$ '
+
+emoji=( 🥝 🍀 🍘 🍚 🍙 🐸 🌈 🌑 🌕 🌙 🌚 🌝 🍛 🍞 🍟 🍡 🍢 🍣 🍥 💔 💜 🥑 🥦 🥥 🥪 🥒 🥓 🦑 🧀)
+
+# функция для случайного выбора эмодзи
+choose_emoji() {
+  local random_index=$((RANDOM % ${#emoji[@]}))
+  echo "${emoji[random_index]}"
+}
+
+# используем случайный выбор эмодзи в PS1
+PS1="\$(choose_emoji) \W \$ "
