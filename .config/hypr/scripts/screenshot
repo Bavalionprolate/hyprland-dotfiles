@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+DIR=~/Pictures/Screenshots
+SCREENSHOT="$DIR/$(date +%Y-%m-%d-%H:%M:%S).png"
+grim -g "$(slurp)" "$SCREENSHOT" && {
+    wl-copy < "$SCREENSHOT"
+    dunstify "Screenshot saved" -a "ss" -i "$SCREENSHOT"
+}
