@@ -10,15 +10,15 @@
 
 1. Клонируем репозиторий:
 
-git clone https://gitlab.com/your_username/hyprland-dotfiles.git
+`git clone https://gitlab.com/BA_usr/dotfiles-for-hyperland.git`
 
 2. Перейдите в клонированный каталог:
 
-cd hyprland-dotfiles
+`cd dotfiles-for-hyperland`
 
 3. Установите необходимые пакеты:
 
-sudo pacman -S ttf-twemoji waybar-hyprland-git hyprland-nvidia-git kitty ttf-jetbrains-mono-nerd pavucontrol jq nvidia-settings libnotify dunst slurp grim wl-clipboard xdg-desktop-portal-hyprland libcanberra
+`sudo pacman -S ttf-twemoji waybar-hyprland-git hyprland-nvidia-git kitty ttf-jetbrains-mono-nerd pavucontrol jq nvidia-settings libnotify dunst slurp grim wl-clipboard xdg-desktop-portal-hyprland libcanberra`
 
 4. Настройте dotfiles в соответствии с вашими предпочтениями.
 
