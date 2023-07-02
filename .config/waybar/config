@@ -85,13 +85,12 @@
       "format-icons": ["󱊡", "󱊢", "󱊣"]
     },   
     "custom/lock": {
-       "tooltip" : false,
-       "on-click": "swaylock",
        "format" : "",
+       "on-click": "sh ~/.config/hypr/scripts/lock",    
     },
     "custom/power-menu": {
         "format": " ⏻ ",
-        "on-click": "bash ~/.config/waybar/scripts/power-menu/powermenu.sh &",
+        "on-click": "systemctl poweroff",
     }, 
     "custom/launcher": {
         "format": "",
