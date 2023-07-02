@@ -1,4 +1,4 @@
-#Hyprland Dotfiles
+# Hyprland Dotfiles
 
 ![Дотфайлы Hyprland.](Media/1.png)
 
