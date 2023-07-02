@@ -1,6 +1,6 @@
 # Hyprland Dotfiles
 
-<video src="Media/rice.mp4" controls title="Title"></video>
+![Hyprland video rice](Media/rice.mp4)
 
 #### Этот репозиторий содержит dotfiles для Hyprland, настраиваемой среды рабочего стола, созданной на основе Arch Linux. Эти точечные файлы предназначены для улучшения внешнего вида и функциональности Hyprland.
 
@@ -26,7 +26,7 @@ cd dotfiles-for-hyperland
 sudo pacman -S ttf-twemoji waybar-hyprland-git hyprland-nvidia-git kitty ttf-jetbrains-mono-nerd pavucontrol jq nvidia-settings libnotify dunst slurp grim wl-clipboard xdg-desktop-portal-hyprland libcanberra
 ~~~
 
-4. ###### Настройте dotfiles в соответствии с вашими предпочтениями.
+4. Настройте dotfiles в соответствии с вашими предпочтениями.
 
 ## Функциональность
 
