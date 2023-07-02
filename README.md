@@ -10,7 +10,7 @@
 
 1. ### Клонируем репозиторий:
 
- ```git clone https://gitlab.com/BA_usr/dotfiles-for-hyperland.git```
+ ~~~git clone https://gitlab.com/BA_usr/dotfiles-for-hyperland.git~~~
 
 2. ### Перейдите в клонированный каталог:
 
