@@ -23,7 +23,7 @@ cd dotfiles-for-hyperland
 3. Установите необходимые пакеты:
 
 ~~~
-yay -S ttf-twemoji waybar-hyprland-git hyprland-nvidia-git kitty ttf-jetbrains-mono-nerd pavucontrol jq nvidia-settings libnotify dunst slurp grim wl-clipboard xdg-desktop-portal-hyprland libcanberra swaylock-effects
+yay -S ttf-twemoji waybar-hyprland-git hyprland-nvidia-git kitty ttf-jetbrains-mono-nerd pavucontrol jq nvidia-settings libnotify dunst slurp grim wl-clipboard xdg-desktop-portal-hyprland libcanberra swaylock-effects wireless_tools pamixer
 ~~~
 
 4. Настройте dotfiles в соответствии с вашими предпочтениями.
