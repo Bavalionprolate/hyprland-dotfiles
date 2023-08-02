@@ -1,2 +1,2 @@
 #!/bin/bash
-exit && killall eww && killall sh
+killall Hyprland && killall eww && killall sh
