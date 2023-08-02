@@ -53,6 +53,7 @@ yay -S ttf-twemoji waybar-hyprland-git hyprland-nvidia-git kitty ttf-jetbrains-m
  <img src="Media/5.png" alt="Управление обоями" width="900"/>
 
 5. Меню быстрых настроек
+<tr>
 Для вызова меню быстрых настроек нажмите сочитание клавиш `Alt + с`. В данном меню есть виджет:
 <tr>
 * WiFi - для подключения к сети и отображения сети;
@@ -66,6 +67,7 @@ yay -S ttf-twemoji waybar-hyprland-git hyprland-nvidia-git kitty ttf-jetbrains-m
  <img src="Media/7.png" alt="Управление обоями"/>
 
 6. Быстрый индикатор звука
+<tr>
 Данный индикатор отображает звук при изменении его через: 
 * сочетание клавиш `Fn + F10` и `Fn + F11`;
 * изменение через меню быстрых настроек в ручном режиме.
