@@ -4,7 +4,7 @@
 ![Hyprland video rice](Media/rice.mp4)
 
 ## Widget
-![Hyprland video rice](Media/widget.mp4)
+![Video demonstrating widgets](Media/widget.mp4)
 
 #### Этот репозиторий содержит dotfiles для Hyprland, настраиваемой среды рабочего стола, созданной на основе Arch Linux. Эти точечные файлы предназначены для улучшения внешнего вида и функциональности Hyprland.
 
