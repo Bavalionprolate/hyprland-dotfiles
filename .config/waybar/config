@@ -3,7 +3,7 @@
     "layer": "top", // Waybar at top layer
     "modules-left": ["custom/launcher", "cpu", "memory", "wlr/workspaces"],
     "modules-center" : ["clock"],
-    "modules-right": ["tray", "hyprland/language", "network", "pulseaudio",  "backlight", "battery", "custom/lock", "custom/power-menu"],
+    "modules-right": ["tray", "hyprland/language", "network", "pulseaudio",  "backlight", "battery", "custom/fast-control-menu", "custom/lock", "custom/power-menu"],
     "wlr/workspaces": {
       "format": "{icon}",
       "on-click": "activate",
@@ -23,8 +23,9 @@
     },
     "clock": {
         "format": "{:%H:%M}",
-        "format-alt": "{:%b %d %Y}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        // "format-alt": "{:%b %d %Y}",
+        // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "on-click": "eww open --toggle song -c ~/.config/eww/player",
     },
 
     "cpu": {
@@ -49,7 +50,7 @@
     "network": {
         /* "format-wifi": "直", */
         "format-wifi": "{icon}",
-        "format-ethernet": " ",
+        "format-ethernet": "󰞉",
         "format-disconnected": "睊",
         "tooltip-format": "{essid}",
         "on-click": "kitty nmtui",
@@ -83,7 +84,12 @@
       "format-alt": "{icon} {time}",
       "format-full": "ﮣ", 
       "format-icons": ["󱊡", "󱊢", "󱊣"]
-    },   
+    },
+    "custom/fast-control-menu": {
+        "format" : "",
+        "tooltip-format": "",
+        "on-click": "eww open --toggle control-center -c ~/.config/eww/fast-control-menu",   
+     },
     "custom/lock": {
        "format" : "",
        "on-click": "sh ~/.config/hypr/scripts/lock",    

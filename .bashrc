@@ -2,10 +2,13 @@
 # ~/.bashrc
 #
 
+sh ~/.config/hypr/scripts/fetch
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
+alias fetch='sh ~/.config/hypr/scripts/fetch'
 
 emoji=( 🥝 🍀 🍘 🍚 🍙 🐸 🌈 🌑 🌕 🌙 🌚 🌝 🍛 🍞 🍟 🍡 🍢 🍣 🍥 💔 💜 🥑 🥦 🥥 🥪 🥒 🥓 🦑 🧀)
 
