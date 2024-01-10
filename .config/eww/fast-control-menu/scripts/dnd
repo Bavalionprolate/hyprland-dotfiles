@@ -6,7 +6,7 @@ toggle() {
 
 if [ $STATUS == "false" ]; then
     dunstctl set-paused true
-    eww -c ~/.config/eww/fast-control-menu update dnd-color="#734bd8"
+    eww -c ~/.config/eww/fast-control-menu update dnd-color="rgba(115,75,216,0.7)"
 else
     dunstctl set-paused false
     notify-send --urgency=normal "Не беспокоить" "Функция не беспокоить отключена!"

@@ -1,4 +1,5 @@
 #!/usr/bin/bash
 
-swaylock -i ~/Pictures/Wallpapers/169939-anime-zenicu_agacuma-ubijca_demonov_kimetsu_no_yaiba-lyudi_v_prirode-multfilm-3840x2160.jpg --effect-blur 40x5 --clock 
-#gtklock
+#swaylock -i ~/Pictures/Wallpapers/chuttersnap-WW9Kxy1VKDU-unsplash.jpg --effect-blur 10x2 --clock &
+gtklock -i &
+#sleep 5 & systemctl suspend

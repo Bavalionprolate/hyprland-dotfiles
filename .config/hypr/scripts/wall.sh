@@ -9,7 +9,11 @@ images=( $(ls $dir) )
 # Use Rofi to display image selection menu
 selected=$(printf '%s\n' "${images[@]}" | rofi -dmenu -p "Select wallpaper image")
 
+if [[ $(pidof swaybg) ]]; then
+  pkill swaybg
+fi
+
 # If user selects an image, run command with selected image as argument
 if [[ -n $selected ]]; then
-  swww img "$dir/$selected" --transition-fps 60 --transition-type any --transition-duration 0.7
+ swaybg -i "$dir/$selected" -m fill
 fi

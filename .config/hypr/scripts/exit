@@ -1,2 +1,3 @@
 #!/bin/bash
-killall Hyprland && killall eww && killall sh
+
+killall Hyprland & killall sh

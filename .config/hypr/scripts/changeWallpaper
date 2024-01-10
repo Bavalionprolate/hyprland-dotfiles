@@ -9,9 +9,4 @@ if [[ $(pidof swaybg) ]]; then
   pkill swaybg
 fi
 
-swww query || swww init
-
-#change-wallpaper using swww
-swww img ${DIR}/${RANDOMPICS} --transition-fps 60 --transition-type any --transition-duration 0.7
-
-
+swaybg -i ${DIR}/${RANDOMPICS} -m fill

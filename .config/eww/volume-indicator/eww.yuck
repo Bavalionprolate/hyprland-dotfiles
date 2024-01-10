@@ -1,6 +1,3 @@
-(defpoll current-volume :interval "0s" "pamixer --get-volume")
-(defvar  volume-hidden "false")
-
 (defwidget volume-slider []
 	(box	:class "cc-slider-box"
 			:orientation "v"
@@ -12,7 +9,7 @@
 					:width 280
 					:max 101
 					:min 0
-					:onchange "pactl set-sink-volume @DEFAULT_SINK@ {}%" 
+					:onchange "pactl set-sink-volume @DEFAULT_SINK@ {}%"
 			)
 	)
 )
@@ -26,10 +23,13 @@
 )
 
 (defwindow volume-indicator
-	:geometry (geometry :x "42%" 
-						:y "70%" 
+	:geometry (geometry :x "42%" :y "70%")
+	:monitor 0
+	:hexpand false
+	:vexpand false
+	
+	(volume-indicator)
 )
-		:monitor 0
-		:hexpand false
-		:vexpand false
-(volume-indicator))
+
+(defpoll current-volume :interval "0s" "pamixer --get-volume")
+(defvar volume-hidden "false")

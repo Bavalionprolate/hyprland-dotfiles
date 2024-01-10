@@ -1,0 +1,16 @@
+#!/bin/bash
+
+shader_path=~/.config/hypr/shader/blue-light-filter.glsl
+
+if [[ $1 == "toggle" ]]; then
+  hyprshade toggle $shader_path
+elif [[ $1 == "status" ]]; then
+  current_shader=$(hyprctl getoption decoration:screen_shader -j | jq -r '.str')
+  if [[ "$current_shader" == "$shader_path" ]]; then
+      echo "on"
+  else
+      echo "off"
+  fi
+else
+  echo "Invalid argument. Use 'toggle' or 'status'."
+fi

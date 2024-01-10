@@ -31,7 +31,7 @@ status() {
                 echo "Off"
         else
                 # on
-                if [ $(echo info | bluetoothctl | grep 'Device' | wc -c) -eq 0 ]; then
+                if [ $(echo info | bluetoothctl | grep 'Device' | wc -c) -eq 31 ]; then
                         echo "On"
                 else
                         # get device alias
@@ -44,18 +44,18 @@ status() {
 battery() {
         mac_address=$(bluetoothctl info | grep "Device" | awk '{print $2}')
 
-        # not connected
-        # if [ $(bluetoothctl show | grep "Powered: yes" | wc -c) -eq 0 ]; then
-        #         echo "Currently Off"
-        # else
-        #         # on
-        #         if [ $(echo info | bluetoothctl | grep 'Device' | wc -c) -eq 0 ]; then
-        #                 echo "Not Connected"
-        #         else
+#         not connected
+         if [ $(bluetoothctl show | grep "Powered: yes" | wc -c) -eq 0 ]; then
+                 echo "󰂲"
+         else
+                 # on
+                 if [ $(echo info | bluetoothctl | grep 'Device' | wc -c) -eq 31 ]; then
+                         echo "󰂰"
+                 else
                         BATTERY=$(echo -e "info $mac_address" | bluetoothctl | grep "Battery" | awk '{print $4}' | tr -d '()')
                         echo "$BATTERY"
-        #         fi
-        # fi
+                 fi
+         fi
 }
 
 
