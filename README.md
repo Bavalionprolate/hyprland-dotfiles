@@ -114,10 +114,11 @@ yay -S ttf-twemoji waybar kitty ttf-jetbrains-mono-nerd pavucontrol jq nvidia-se
 ## Полезные ссылки:
 
 * настройка gtkgreet <br>
-https://www.reddit.com/r/hyprland/comments/13gl7mc/use_hyprland_to_start_gtkgreet/ https://wiki.archlinux.org/title/Greetd
+https://www.reddit.com/r/hyprland/comments/13gl7mc/use_hyprland_to_start_gtkgreet/ <br>
+https://wiki.archlinux.org/title/Greetd
 
 * настройка bluetooth для отображения батареи <br>
 https://askubuntu.com/questions/1117563/check-bluetooth-headphones-battery-status-in-linux
 
-* как правильно установить proprietary драйвера для nvidea <br>
+* как правильно установить proprietary драйвера для nvidia <br>
 https://wiki.hyprland.org/Nvidia/
