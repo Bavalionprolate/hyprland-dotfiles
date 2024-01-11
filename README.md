@@ -24,7 +24,9 @@ cd dotfiles-for-hyperland
 yay -S ttf-twemoji waybar kitty ttf-jetbrains-mono-nerd pavucontrol jq nvidia-settings libnotify dunst slurp grim wl-clipboard xdg-desktop-portal-hyprland libcanberra wireless_tools pamixer xdg-user-dirs blueberry wlrobs-hg hyprshade greetd greetd-gtkgreet cage
 ~~~
 
-4. Настройте dotfiles в соответствии с вашими предпочтениями.
+4. Выделите и переместите директорию `.fonts` в вашу домашнюю папку и всё содержимое из `.config` в вашу локальную директорию `config`.
+
+5. Настройте dotfiles в соответствии с вашими предпочтениями.
 
 ## Функциональность
 
