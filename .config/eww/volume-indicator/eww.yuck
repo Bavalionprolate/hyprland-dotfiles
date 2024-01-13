@@ -1,3 +1,6 @@
+(defpoll current-volume :interval "0s" "pamixer --get-volume")
+(defvar volume_hidden "false")
+
 (defwidget volume-slider []
 	(box	:class "cc-slider-box"
 			:orientation "v"
@@ -15,11 +18,11 @@
 )
 
 (defwidget volume-indicator []
-			(box	:class "cc-padded-box"
-					:visible volume-hidden
-					:orientation "v"
-						(volume-slider)
-			)
+    (box :class "cc-padded-box" :orientation "v"
+            (box :class "back" :visible volume_hidden
+                (volume-slider)
+            )
+    )
 )
 
 (defwindow volume-indicator
@@ -30,6 +33,3 @@
 	
 	(volume-indicator)
 )
-
-(defpoll current-volume :interval "0s" "pamixer --get-volume")
-(defvar volume-hidden "false")

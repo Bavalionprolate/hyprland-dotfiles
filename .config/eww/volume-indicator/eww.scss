@@ -7,6 +7,10 @@ $gray-alt: #333333;
 }
 
 .cc-padded-box{
+  padding: 1px;
+}
+
+.back{
   background-color: rgba($color: $gray, $alpha: 0.4);
   border-radius: 16px;
   border-style: solid;
