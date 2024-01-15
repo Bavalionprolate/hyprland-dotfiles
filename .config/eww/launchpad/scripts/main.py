@@ -4,7 +4,8 @@ from gi.repository import Gtk, Gio
 import json
 import subprocess, sys
 
-CONFIG_PATH = '/home/bavalion/.config/eww/launchpad/'
+user = subprocess.check_output(['whoami']).strip().decode("utf-8")
+CONFIG_PATH = f'/home/{user}/.config/eww/launchpad/'
 
 class AppLauncher:
 	def __init__(self):
