@@ -20,7 +20,7 @@
             (box :class "app-grid" :space-evenly false :spacing 60 :orientation "v" :onclick "eww close app-launcher -c ~/.config/eww/launchpad;"
                 (box :class "input-box" :halign "center"
                     (box :orientation "h" :space-evenly false :halign "end" :spacing 10 
-                        (input :onchange "python /home/bavalion/.config/eww/launchpad/scripts/main.py -s '{}'" :value input-text)
+                        (input :onchange "python ~/.config/eww/launchpad/scripts/main.py -s '{}'" :value input-text)
                         (button :onclick "eww -c ~/.config/eww/launchpad update input-text='' "
                             (label :text "󰅖")
                         )
