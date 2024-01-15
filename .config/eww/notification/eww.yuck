@@ -68,7 +68,7 @@
 )
 
 (defwidget control-center []
-    (box :class "cc-padded-box-ms" :orientation "v" :space-evenly true :spacing 10 :width 431 :visible shower
+    (box :class "cc-padded-box-ms" :orientation "v" :space-evenly true :spacing 10 :width 431
         (notifcenter)
     )
 )
@@ -78,5 +78,3 @@
     :stacking "fg"
 	(control-center )
 )
-
-(defvar shower "true")
