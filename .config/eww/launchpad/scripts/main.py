@@ -28,7 +28,10 @@ class AppLauncher:
 		return json.dumps(apps_info)
 
 	def get_app_info(self, app):
-		icon_name = app.get_icon().get_names()[0] if app.get_icon() else None
+		try:
+			icon_name = app.get_icon().get_names()[0] if app.get_icon() else None
+		except AttributeError:
+			icon_name = None
 		icon_path = self.get_gtk_icon(icon_name) if icon_name else None
 		desktop_file = app.get_filename()
 		if desktop_file:
@@ -40,7 +43,7 @@ class AppLauncher:
 		return None
 
 	def get_app_info_from_desktop_file(self, app, desktop_file):
-		with open(desktop_file, 'r') as f:
+		with open(desktop_file, 'r', encoding='utf-8', errors='ignore') as f:
 			contents = f.readlines()
 			nodisplay = False
 			terminal = False
