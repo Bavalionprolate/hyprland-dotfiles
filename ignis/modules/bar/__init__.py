@@ -4,6 +4,7 @@ from ignis.utils import Utils
 from ignis.services.audio import AudioService
 from ignis.services.system_tray import SystemTrayService, SystemTrayItem
 from ignis.services.hyprland import HyprlandService
+from modules.bar.vpn_control import toggle_vpn, check_vpn_status
 
 
 audio = AudioService.get_default()
@@ -118,6 +119,23 @@ def speaker_slider() -> Widget.Scale:
         css_classes=["volume-slider"],
     )
 
+def vpn_button() -> Widget.Button:
+    button = Widget.Button(
+        css_classes=["vpn-button"],
+        on_click=lambda x: toggle_vpn() and update_button(button),
+        child=Widget.Label(label="VPN")
+    )
+
+    def update_button(widget):
+        if check_vpn_status():
+            widget.add_css_class("vpn-active")
+        else:
+            widget.remove_css_class("vpn-active")
+
+    Utils.Poll(5, lambda _: update_button(button))
+
+    return button
+
 def left() -> Widget.Box:
     return Widget.Box(child=[workspaces(), client_title()], spacing=10)
 
@@ -131,7 +149,7 @@ def center() -> Widget.Box:
 
 def right() -> Widget.Box:
     return Widget.Box(
-        child=[tray(), speaker_volume(), speaker_slider(), clock()], spacing=10
+        child=[tray(), vpn_button(), speaker_volume(), speaker_slider(), clock()], spacing=10
     )
 
 def bar(monitor_id: int = 0) -> Widget.Window:
