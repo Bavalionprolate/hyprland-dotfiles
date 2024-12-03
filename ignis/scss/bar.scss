@@ -1,0 +1,82 @@
+.bar {
+    padding: 0.4rem 1rem;
+    background-color: $bg;
+    color: $active;
+    border-bottom: 2px solid $silver-transparent;
+}
+
+.middle-separator {
+    background-color: gray;
+    padding: 0 0.03rem;
+}
+
+.volume-slider trough {
+    min-width: 100px;
+    background-color: gray;
+    min-height: 0.3rem;
+    border-radius: 1rem;
+
+    highlight {
+        background-color: $active;
+    }
+
+    slider {
+        background-color: $fg;
+        min-height: 15px;
+        min-width: 15px;
+        margin: -4px;
+        border-radius: 1rem;
+    }
+}
+
+.launcher_button{
+    padding-right: 5px;
+    font-size: 24px;
+}
+
+.workspaces {
+    padding: 5px 5px;
+    border-radius: 12px;
+    background-color: rgba(69, 69, 69, 0.13);
+    border: 1px solid $silver-transparent;
+    min-height: 1.6rem;
+}
+
+.workspace {
+    padding: 0px 15px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease-in-out;
+    opacity: 0.4;
+}
+
+.workspace.active, .workspace:hover  {
+    background-color: rgba(255, 255, 255, 0.5);
+    min-width: 25px;
+    transition: all 0.3s ease-in-out;
+    opacity:1.0;
+}
+
+.tray-item {
+    all: unset;
+}
+
+.clock {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+}
+
+.vpn-button {
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.3s ease;
+}
+
+.vpn-button.vpn-active {
+    color: $active;
+}
+
+.control-center-button{
+    padding-right: .5rem;
+    padding-top: .2rem;
+    font-size: 16px;
+}

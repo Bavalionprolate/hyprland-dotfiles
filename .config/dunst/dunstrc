@@ -1,8 +1,0 @@
-[global]
-	skip_display = yes
-	# Which monitor should the notifications be displayed on.
-	monitor = 0
-	sort = yes
-#[script]
-	summary = "*"
-	script = /home/bavalion/.config/hypr/scripts/notifyAlert.sh

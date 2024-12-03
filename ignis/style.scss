@@ -1,0 +1,31 @@
+* {
+    all: unset;
+    font-weight: bold;
+}
+
+$bg:  #00000050;
+$bg-light: #5a5a5a50;
+$bgb: #131313;
+$bgb-light: #222222;
+$fg: #dfdef0;
+$active: #ffffff;
+$unactive: #bbbbbb;
+$silver-transparent: rgba(105, 105, 105, 0.4);
+
+@mixin window {
+    background-color: $bg;
+    border-radius: 1rem;
+    border: 1px solid $bg-light;
+    padding: 1rem;
+    color: $fg;
+    margin: 1rem;
+}
+
+@mixin hover($bg) {
+    background-color: $bg;
+    &:hover {
+        background-color: lighten($bg, 5%);
+    }
+}
+
+@import "./scss/bar.scss";
