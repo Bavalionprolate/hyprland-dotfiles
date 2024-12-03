@@ -5,11 +5,6 @@
     border-bottom: 2px solid $silver-transparent;
 }
 
-.middle-separator {
-    background-color: gray;
-    padding: 0 0.03rem;
-}
-
 .volume-slider trough {
     min-width: 100px;
     background-color: gray;
@@ -27,11 +22,6 @@
         margin: -4px;
         border-radius: 1rem;
     }
-}
-
-.launcher_button{
-    padding-right: 5px;
-    font-size: 24px;
 }
 
 .workspaces {
@@ -64,19 +54,4 @@
 .clock {
     font-size: 1rem;
     margin-right: 0.5rem;
-}
-
-.vpn-button {
-    color: rgba(255, 255, 255, 0.5);
-    transition: color 0.3s ease;
-}
-
-.vpn-button.vpn-active {
-    color: $active;
-}
-
-.control-center-button{
-    padding-right: .5rem;
-    padding-top: .2rem;
-    font-size: 16px;
 }
