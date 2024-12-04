@@ -21,7 +21,7 @@ cd dotfiles-for-hyperland
 3. Install the required packages:
 
 ~~~
-paru -S ignis v2raya gst-plugins-ugly gst-plugins-good bibata-cursor-theme ttf-jetbrains-mono-nerd slurp grim cmake meson cpio grimblast mpvpaper kitty ttf-jetbrains-mono-nerd pavucontrol xdg-desktop-portal-hyprland xdg-user-dirs wlrobs-hg
+paru -S ignis dart-sass v2raya gst-plugins-ugly gst-plugins-good bibata-cursor-theme ttf-jetbrains-mono-nerd slurp grim cmake meson cpio grimblast mpvpaper kitty ttf-jetbrains-mono-nerd pavucontrol xdg-desktop-portal-hyprland xdg-user-dirs wlrobs-hg
 ~~~
 
 4. Move the `.config` directory to your home folder.
