@@ -3,6 +3,8 @@
     font-weight: bold;
 }
 
+// main colors for all system
+
 $bg:  #00000050;
 $bg-light: #5a5a5a50;
 $bgb: #131313;
@@ -29,3 +31,26 @@ $silver-transparent: rgba(105, 105, 105, 0.4);
 }
 
 @import "./bar.scss";
+
+
+
+
+// exampl style class
+.volume-slider trough {
+    min-width: 100px;
+    background-color: $unactive;
+    min-height: 0.3rem;
+    border-radius: 1rem;
+
+    highlight {
+        background-color: $active;
+    }
+
+    slider {
+        background-color: $fg;
+        min-height: 15px;
+        min-width: 15px;
+        margin: -4px;
+        border-radius: 1rem;
+    }
+}

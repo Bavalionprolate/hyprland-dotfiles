@@ -6,3 +6,9 @@ nautilus
 user-dirs.dirs
 user-dirs.locale
 pulse
+Code - OSS
+go/telemetry
+systemd
+gtk-4.0
+mimeapps.list
+pavucontrol.ini

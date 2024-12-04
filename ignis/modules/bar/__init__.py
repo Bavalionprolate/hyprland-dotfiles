@@ -67,6 +67,18 @@ def clock() -> Widget.Label:
         ).bind("output"),
     )
 
+def kb_layout():
+    hyprland = HyprlandService.get_default()
+    return Widget.Button(
+        css_classes=["kb-layout"],
+        on_click=lambda x: hyprland.switch_kb_layout(),
+        child=Widget.Label(
+            label=hyprland.bind(
+                "kb_layout", transform=lambda value: value[:2].lower()
+            )
+        ),
+    )
+
 def speaker_volume() -> Widget.Box:
     return Widget.Box(
         child=[
@@ -149,7 +161,7 @@ def center() -> Widget.Box:
 
 def right() -> Widget.Box:
     return Widget.Box(
-        child=[tray(), vpn_button(), speaker_volume(), speaker_slider(), clock()], spacing=10
+        child=[tray(), vpn_button(), kb_layout(), speaker_volume(), speaker_slider(), clock()], spacing=10
     )
 
 def bar(monitor_id: int = 0) -> Widget.Window:

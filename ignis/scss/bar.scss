@@ -5,25 +5,6 @@
     border-bottom: 2px solid $silver-transparent;
 }
 
-.volume-slider trough {
-    min-width: 100px;
-    background-color: gray;
-    min-height: 0.3rem;
-    border-radius: 1rem;
-
-    highlight {
-        background-color: $active;
-    }
-
-    slider {
-        background-color: $fg;
-        min-height: 15px;
-        min-width: 15px;
-        margin: -4px;
-        border-radius: 1rem;
-    }
-}
-
 .workspaces {
     padding: 5px 5px;
     border-radius: 12px;
@@ -35,13 +16,13 @@
 .workspace {
     padding: 0px 15px;
     border-radius: 12px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: $unactive;
     transition: all 0.3s ease-in-out;
     opacity: 0.4;
 }
 
 .workspace.active, .workspace:hover  {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: $unactive;
     min-width: 25px;
     transition: all 0.3s ease-in-out;
     opacity:1.0;
@@ -57,7 +38,7 @@
 }
 
 .vpn-button {
-    color: rgba(255, 255, 255, 0.5);
+    color: $unactive;
     transition: color 0.3s ease;
 }
 
