@@ -8,6 +8,10 @@ app = IgnisApp.get_default()
 app.apply_css(f"{Utils.get_current_dir()}/scss/style.scss")
 
 from modules.bar import bar
+from modules.launchpad import launchpad
 
 for i in range(Utils.get_n_monitors()):
     bar(i)
+
+launchpad()
+
