@@ -12,3 +12,5 @@ systemd
 gtk-4.0
 mimeapps.list
 pavucontrol.ini
+simple-update-notifier
+vesktop
