@@ -30,6 +30,39 @@ $silver-transparent: rgba(105, 105, 105, 0.4);
     }
 }
 
+popover.menu {
+    contents {
+        background-color: $bg;
+        padding: 0.35rem;
+        border-radius: 0.5rem;
+        border: 1px solid $silver-transparent;
+        modelbutton {
+            transition: 0.3s;
+            border-radius: 0.5rem;
+            padding: 0.25rem 1rem;
+        }
+        modelbutton:hover {
+            background-color: mix($bg, $unactive, 80%);
+        }
+        separator {
+            background-color: mix($bg, $unactive, 90%);
+            min-height: 0.1rem;
+            margin: 0.5rem 0;
+        }
+
+        label:disabled {
+            color: $unactive;
+        }
+
+        arrow {
+            opacity: 0.3;
+            &:hover { background: none; }
+            &.left { -gtk-icon-source: -gtk-icontheme("go-previous-symbolic"); }
+            &.right { -gtk-icon-source: -gtk-icontheme("go-next-symbolic"); }
+          }
+    }
+}
+
 @import "./bar.scss";
 @import "./launchpad.scss";
 

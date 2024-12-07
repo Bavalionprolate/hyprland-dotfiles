@@ -1,27 +1,30 @@
 from ignis.services.applications import ApplicationsService
 from ignis.widgets import Widget
-
 from .app_item import LaunchpadAppItem
 from .search_button import SearchWebButton
-from .utils import is_url
+from .hidden_apps_manager import is_hidden
+
 
 def launchpad() -> Widget.Window:
-    def refresh_app_list(app_list: Widget.Grid, query: str = "") -> None:
+    def get_filtered_apps(query: str):
         if applications is None:
-            app_list.child = [Widget.Label(label="Applications unavailable")]
-            return
+            return []
 
         if query == "":
-            apps = applications.apps
-            app_list.visible = True
-            app_list.child = [LaunchpadAppItem(i) for i in apps]
+            return [app for app in applications.apps if not is_hidden(app.id)]
         else:
-            apps = applications.search(applications.apps, query)
-            if apps == []:
-                app_list.child = [SearchWebButton(query)]
-            else:
-                app_list.visible = True
-                app_list.child = [LaunchpadAppItem(i) for i in apps]
+            return applications.search(applications.apps, query)
+
+    def refresh_app_list(app_list: Widget.Grid, query: str = "") -> None:
+        apps = get_filtered_apps(query)
+
+        if not apps and not query:
+            app_list.child = [Widget.Label(label="No applications available.")]
+        elif not apps:
+            app_list.child = [SearchWebButton(query)]
+        else:
+            app_list.visible = True
+            app_list.child = [LaunchpadAppItem(i, refresh_app_list) for i in apps]
 
     def search(entry: Widget.Entry, app_list: Widget.Grid) -> None:
         query = entry.text

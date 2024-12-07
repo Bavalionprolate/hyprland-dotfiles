@@ -1,13 +1,16 @@
 from ignis.widgets import Widget
 from ignis.services.applications import Application, ApplicationAction
 from ignis.app import IgnisApp
+from .hidden_apps_manager import hide_app, show_app, is_hidden
 
 app = IgnisApp.get_default()
 
 
 class LaunchpadAppItem(Widget.Button):
-    def __init__(self, application: Application) -> None:
+    def __init__(self, application, refresh_callback):
         self._application = application
+        self._refresh_callback = refresh_callback
+
         icon = application.icon or "application-x-executable"
         label_text = application.name
 
@@ -24,8 +27,8 @@ class LaunchpadAppItem(Widget.Button):
                         label=label_text,
                         css_classes=["launchpad-app-label"],
                         wrap=True,
-                        wrap_mode='word',
-                        justify='center',
+                        wrap_mode="word",
+                        justify="center",
                     ),
                 ],
             ),
@@ -40,18 +43,21 @@ class LaunchpadAppItem(Widget.Button):
         except Exception as e:
             print(f"Error launching application: {e}")
 
-    def launch_action(self, action: ApplicationAction) -> None:
-        try:
-            action.launch()
-            app.close_window("ignis_LAUNCHPAD")
-        except Exception as e:
-            print(f"Error launching action: {e}")
+    def toggle_hidden(self) -> None:
+        app_id = self._application.id
+        if is_hidden(app_id):
+            show_app(app_id)
+        else:
+            hide_app(app_id)
+
+        self._refresh_callback()
 
     def __sync_menu(self) -> None:
+        is_hidden_flag = is_hidden(self._application.id)
+
         self._menu = Widget.PopoverMenu(
             items=[
                 Widget.MenuItem(label="Launch", on_activate=lambda x: self.launch()),
-                Widget.Separator(),
             ]
             + [
                 Widget.MenuItem(
@@ -68,6 +74,10 @@ class LaunchpadAppItem(Widget.Button):
                 if not self._application.is_pinned
                 else Widget.MenuItem(
                     label="󰤰 Unpin", on_activate=lambda x: self._application.unpin()
+                ),
+                Widget.MenuItem(
+                    label="  Show" if is_hidden_flag else "  Hide",
+                    on_activate=lambda x: self.toggle_hidden(),
                 ),
             ]
         )
