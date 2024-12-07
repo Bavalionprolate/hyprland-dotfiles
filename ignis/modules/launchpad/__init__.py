@@ -6,9 +6,7 @@ from .search_button import SearchWebButton
 from .utils import is_url
 
 def launchpad() -> Widget.Window:
-    def search(entry: Widget.Entry, app_list: Widget.Grid) -> None:
-        query = entry.text
-
+    def refresh_app_list(app_list: Widget.Grid, query: str = "") -> None:
         if applications is None:
             app_list.child = [Widget.Label(label="Applications unavailable")]
             return
@@ -25,12 +23,17 @@ def launchpad() -> Widget.Window:
                 app_list.visible = True
                 app_list.child = [LaunchpadAppItem(i) for i in apps]
 
-    def on_open(window: Widget.Window, entry: Widget.Entry) -> None:
+    def search(entry: Widget.Entry, app_list: Widget.Grid) -> None:
+        query = entry.text
+        refresh_app_list(app_list, query)
+
+    def on_open(window: Widget.Window, entry: Widget.Entry, app_list: Widget.Grid) -> None:
         if not window.visible:
             return
 
         entry.text = ""
         entry.grab_focus()
+        refresh_app_list(app_list)
 
     applications = ApplicationsService.get_default()
 
@@ -49,7 +52,7 @@ def launchpad() -> Widget.Window:
         else None,
     )
 
-    search(entry, app_list)
+    refresh_app_list(app_list)
 
     main_box = Widget.Box(
         vertical=True,
@@ -82,7 +85,7 @@ def launchpad() -> Widget.Window:
         kb_mode="on_demand",
         css_classes=["launchpad"],
         setup=lambda self: self.connect(
-            "notify::visible", lambda x, y: on_open(self, entry)
+            "notify::visible", lambda x, y: on_open(self, entry, app_list)
         ),
         anchor=["top", "right", "bottom", "left"],
         child=Widget.Overlay(
