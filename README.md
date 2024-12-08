@@ -1,6 +1,7 @@
 # Hyprland Dotfiles
 
 This repository contains dotfiles for Hyprland, a custom desktop environment built on Arch Linux. These dotfiles enhance the appearance and functionality of Hyprland.
+My new gkt4-based shell written in python using the Ignis library/framework to work with gtk, gi, and gtk-layer-shell in a streamlined way.
 
 ## Installation
 
