@@ -15,7 +15,7 @@ git clone https://github.com/Bavalionprolate/hyprland-dotfiles.git
 2. Navigate to the cloned directory:
 
 ~~~
-cd dotfiles-for-hyperland
+cd hyprland-dotfiles
 ~~~
 
 3. Install the required packages:
