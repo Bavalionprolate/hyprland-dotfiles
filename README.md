@@ -27,3 +27,14 @@ paru -S ignis dart-sass v2raya gst-plugins-ugly gst-plugins-good bibata-cursor-t
 4. Move the `.config` directory to your home folder.
 
 5. Customize the dotfiles according to your preferences.
+
+# The following features are planned to be added in the future for mid-2025
+
+- [ ] Volume indicator
+- [ ] Add slides to launchpad for scrolling applications if they exceed the number in the grid
+- [ ] Quick Control Panel
+- [ ] Notification output
+- [ ] Power menu
+- [ ] Dock with pinned apps
+- [ ] The launchpad call button on the top bar
+
