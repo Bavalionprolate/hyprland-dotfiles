@@ -1,7 +1,10 @@
 from ignis.widgets import Widget
 from ignis.utils import Utils
+from gi.repository import Gio
+from ignis.app import IgnisApp
 from .utils import is_url
 
+app = IgnisApp.get_default()
 
 class SearchWebButton(Widget.Button):
     def __init__(self, query: str):
@@ -36,13 +39,16 @@ class SearchWebButton(Widget.Button):
 
         super().__init__(
             on_click=lambda x: self.launch(),
-            css_classes=["launchpad-app"],
+            css_classes=["launchpad-app-search-box"],
             child=Widget.Box(
+                css_classes=["launchpad-app-search"],
+                vertical=False,
+                spacing=25,
                 child=[
-                    Widget.Icon(image=icon_name, pixel_size=48),
+                    Widget.Icon(image=icon_name, pixel_size=84),
                     Widget.Label(
                         label=label,
-                        css_classes=["launchpad-app-label"],
+                        css_classes=["launchpad-app-label-search"],
                     ),
                 ]
             ),
@@ -51,5 +57,6 @@ class SearchWebButton(Widget.Button):
     def launch(self) -> None:
         try:
             Utils.exec_sh_async(f"xdg-open {self._url}")
+            app.close_window("ignis_LAUNCHPAD")
         except Exception as e:
             print(f"Error launching browser: {e}")

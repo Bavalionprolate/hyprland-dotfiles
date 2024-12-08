@@ -28,7 +28,7 @@
     min-height: 85rem;
 }
 
-.launchpad-app {
+.launchpad-app, .launchpad-app-search-box {
     all: unset;
     border-radius: 1rem;
     padding-top: 1.6rem;
@@ -46,7 +46,21 @@
     }
 }
 
+.launchpad-app-search-box{
+    min-width: 145rem;
+    border: 1px solid silver;
+    background: $bg-light;
+}
+
+.launchpad-app-search{
+    margin-left: 64.5rem;
+}
+
 .launchpad-app-label {
     font-size: 0.8rem;
+}
+
+.launchpad-app-label-search{
+    font-size: 1rem;
 }
 
