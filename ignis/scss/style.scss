@@ -36,6 +36,7 @@ popover.menu {
         padding: 0.35rem;
         border-radius: 0.5rem;
         border: 1px solid $silver-transparent;
+        min-width: 10rem;
         modelbutton {
             transition: 0.3s;
             border-radius: 0.5rem;
