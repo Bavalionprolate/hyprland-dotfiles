@@ -43,6 +43,13 @@ class LaunchpadAppItem(Widget.Button):
         except Exception as e:
             print(f"Error launching application: {e}")
 
+    def launch_action(self, action: ApplicationAction) -> None:
+        try:
+            action.launch()
+            app.close_window("ignis_LAUNCHPAD")
+        except Exception as e:
+            print(f"Error launching action: {e}")
+
     def toggle_hidden(self) -> None:
         app_id = self._application.id
         if is_hidden(app_id):
