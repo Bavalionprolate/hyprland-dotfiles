@@ -22,7 +22,7 @@ cd hyprland-dotfiles
 3. Install the required packages:
 
 ~~~
-paru -S ignis dart-sass v2raya gst-plugins-ugly gst-plugins-good bibata-cursor-theme ttf-jetbrains-mono-nerd slurp grim cmake meson cpio grimblast mpvpaper kitty pavucontrol xdg-desktop-portal-hyprland xdg-desktop-portal-gtk xdg-user-dirs wlrobs-hg cmake meson cpio imv swaybg swww telegram-desktop
+paru -S ignis dart-sass v2raya gst-plugins-ugly gst-plugins-good bibata-cursor-theme ttf-jetbrains-mono-nerd slurp grim cmake meson cpio grimblast mpvpaper kitty pavucontrol xdg-desktop-portal-hyprland xdg-desktop-portal-gtk xdg-user-dirs wlrobs-hg cmake meson cpio imv swaybg swww telegram-desktop alsa-utils alsa-plugins alsa-lib
 ~~~
 
 4. Move the `.config` directory to your home folder.
