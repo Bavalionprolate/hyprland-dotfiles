@@ -3,7 +3,6 @@ from ignis.widgets import Widget
 from ignis.utils import Utils
 from ignis.app import IgnisApp
 from ignis.services.fetch import FetchService
-# from ..settings import settings_window
 from ignis.services.options import OptionsService
 
 options = OptionsService.get_default()
@@ -12,13 +11,6 @@ user_opt_group = options.create_group("user", exists_ok=True)
 avatar_opt = user_opt_group.create_option(
     "avatar",
     default=f"/var/lib/AccountsService/icons/{os.getenv('USER')}",
-    exists_ok=True,
-)
-
-settings_opt_group = options.create_group("settings", exists_ok=True)
-settings_last_page = settings_opt_group.create_option(
-    "last_page",
-    default=0,
     exists_ok=True,
 )
 
@@ -72,7 +64,6 @@ def settings_button() -> Widget.Button:
         halign="end",
         hexpand=True,
         css_classes=["user-settings"],
-        # on_click=lambda x: settings_window(),
     )
 
 

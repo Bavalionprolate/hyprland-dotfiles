@@ -32,13 +32,13 @@ wl-clipboard libnotify
 
 # The following features are planned to be added in the future for mid-2025
 
-- [ ] Volume indicator
+- [x] Volume indicator
 - [ ] Add slides to launchpad for scrolling applications if they exceed the number in the grid
-- [ ] Quick Control Panel
-- [ ] Notification output
-- [ ] Power menu
-- [ ] Dock with pinned apps
-- [ ] The launchpad call button on the top bar
+- [x] Quick Control Panel
+- [x] Notification output
+- [x] Power menu
+- [x] Dock with pinned apps
+- [x] The launchpad call button on the top bar
 
 
 
