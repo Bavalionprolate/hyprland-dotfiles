@@ -1,0 +1,24 @@
+.power-window{
+    background-color: $bg;
+}
+
+.power-menu{
+    padding: 1rem;
+    color: $fg;
+}
+
+.power-button{
+    background: $bg-light;
+    border: 1px solid transparent;
+    padding: 1rem;
+    border-radius: .5rem;
+
+    min-width: 5.5rem;
+
+    &:hover {
+        background: $bg-light;
+        border: 1px solid silver;
+        transition: all 0.38s;
+    }
+
+}   

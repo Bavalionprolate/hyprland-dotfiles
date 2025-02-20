@@ -1,0 +1,242 @@
+.control-center {
+    min-width: 28rem;
+    margin: .5rem;
+}
+
+.control-center-widget {
+    padding: .85rem;
+    margin-bottom: 1rem;
+    background-color: $bg;
+    border-radius : 1rem;
+    border: 1px solid $silver-transparent;
+}
+
+
+.qs-main-box {
+    margin-top: 0.5rem;
+}
+
+.qs-button {
+    @include hover($bg);
+    color: $active;
+    min-height: 2.2rem;
+    border-radius: 1.2rem;
+    transition: 0.3s;
+    padding: .2rem .8rem;
+    margin-right: .4rem;
+    border: 1px solid $silver-transparent;
+
+    &.active {
+        @include hover($bg-light);
+        color: $active;
+    }
+
+}
+
+.qs-button-label {
+    margin-left: 0.5rem;
+}
+
+.volume-slider {
+    all: unset;
+
+    * {
+        all: unset;
+    }
+}
+
+.volume-slider trough,
+.volume-slider trough highlight {
+    background-color: $bg;
+    border-radius: 1rem;
+    min-height: 1rem;
+}
+
+
+.volume-slider trough highlight {
+    background-color: $unactive;
+}
+
+.volume-entry-list, .ethernet-network-list, .wifi-network-list {
+    margin-top: 1rem;
+    border-radius: 1rem;
+    margin: .2rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid $silver-transparent;
+    background: $bg-light;
+}
+
+.volume-entry {
+    @include hover($bg-light);
+    margin-bottom: .8rem;
+    transition: 0.3s;
+    border-radius: 1rem;
+    padding: 0.5rem 0.5rem;
+}
+
+.volume-entry-list-header-label {
+    font-size: 1.35rem;
+    margin-left: 0.5rem;
+}
+
+.volume-entry-list-header-box {
+    margin-bottom: 0.75rem;
+}
+
+.volume-icon {
+    padding: 0.35rem;
+    transition: 0.3s;
+    margin-right: 0.5rem;
+}
+
+.volume-arrow {
+    transition: 0.3s;
+    margin-left: 0.5rem;
+}
+
+.user {
+    margin-top: 1rem;
+}
+
+.user-name-box {
+    margin-left: 0.5rem;
+}
+
+.user-name {
+    font-size: 1rem;
+}
+
+.user-name-secondary {
+    color: $active;
+    font-size: 0.9rem;
+}
+
+.user-settings {
+    @include hover($bg-light);
+    color: $active;
+    border-radius: 2rem;
+    min-width: 2.35rem;
+    margin: 0.4rem 0rem;
+    margin-right: 0.5rem;
+    transition: 0.3s;
+}
+
+.user-power {
+    @include hover($bg-light);
+    color: $active;
+    border-radius: 1.5rem;
+    min-width: 2.35rem;
+    margin: 0.4rem 0rem;
+    transition: 0.3s;
+}
+
+.header-clock {
+    font-size: 2.6rem;
+}
+
+.header-date {
+    font-weight: normal;
+}
+
+.ethernet-header-box, .wifi-header-box {
+    margin-bottom: 0.5rem;
+}
+
+.ethernet-header-label {
+    font-size: 1.35rem;
+    margin-left: 0.75rem;
+}
+
+.wifi-header-label {
+    font-size: 1.35rem;
+}
+
+.ethernet-connection-item, .wifi-network-item, .vpn-connection-item {
+    @include hover($bg-light);
+    border: 1px solid $silver-transparent;
+    transition: 0.3s;
+    border-radius: 1rem;
+    padding: 0.5rem 0.5rem;
+    margin-top: 1rem;
+}
+
+
+.ethernet-connection-label, .wifi-network-label, .vpn-connection-label {
+    margin-left: 0.5rem;
+}
+
+.ethernet-connection-item-connect-label {
+    color: $active;
+    font-size: 1rem;
+}
+
+.volume-entry-label {
+    margin-left: 0.5rem; 
+    margin-right: 1rem;
+}
+
+.notification-center {
+    background-color: $bg;
+    padding: .85rem;
+    border-radius: 1rem;
+    min-height: 22rem;
+    border: 1px solid $silver-transparent;
+}
+
+.notification-center-header {
+    margin-bottom: 1rem;
+}
+
+.notification {
+    @include hover($bg-light);
+    transition: 0.3s;
+    border: 1px solid $silver-transparent;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: .2rem;
+    margin-top: 1rem;
+}
+
+.notification-header-label, .notification-count {
+    font-size: 1.1rem;
+    margin-left: 0.5rem;
+}
+
+.notification-close {
+    @include hover($bg-light);
+    color: $active;
+    border-radius: 1rem;
+    padding: 0.2rem;
+    margin-left: 0.5rem;
+    transition: 0.3s;
+    border: 1px solid $silver-transparent;
+}
+
+.notification-clear-all {
+    @include hover($bg-light);
+    transition: 0.3s;
+    border-radius: 1rem;
+    padding: 0.25rem 1rem;
+}
+
+.notification-action {
+    color: $active;
+    @include hover($bg-light);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.25rem;
+    transition: 0.3s;
+}
+
+.notification-screenshot-label {
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.notification-center-info-label {
+    color: $active;
+}
+
+.notification-body {
+    color: $unactive;
+}

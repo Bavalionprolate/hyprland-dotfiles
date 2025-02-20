@@ -1,0 +1,10 @@
+.osd {
+    @include window;
+    margin-bottom: 10rem;
+    min-width: 15rem;
+}
+
+.osd .volume-slider-indicator {
+    margin-left: 1rem;
+}
+

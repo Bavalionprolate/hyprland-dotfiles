@@ -6,6 +6,7 @@ from .utils import is_url
 
 app = IgnisApp.get_default()
 
+
 class SearchWebButton(Widget.Button):
     def __init__(self, query: str):
         self._query = query

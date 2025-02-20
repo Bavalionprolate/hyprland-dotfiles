@@ -34,4 +34,5 @@ def show_app(app_id):
 def is_hidden(app_id):
     return app_id in hidden_apps
 
+
 load_hidden_apps()

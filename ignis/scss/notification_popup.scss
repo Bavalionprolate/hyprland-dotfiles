@@ -1,0 +1,17 @@
+.notification-popup {
+    @include window;
+    min-width: 25rem;
+
+    & .notification-close {
+        @include hover($bg);
+    }
+
+    & .notification-action {
+        @include hover($bg-light);
+    }
+}
+
+.fade-out {
+    transition: opacity 0.3s ease-out;
+    opacity: 0;
+}

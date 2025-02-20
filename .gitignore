@@ -20,3 +20,16 @@ font-manager
 fontconfig
 obs-studio
 htop
+QtProject.conf
+porcupine_debug.log
+qBittorrent
+ignis/modules/chatai
+ignis/__pycache__
+autostart
+ignis/modules/bar/__pycache__
+waypaper
+ignis/modules/control_center/__pycache__
+ignis/modules/launchpad/__pycache__
+ignis/modules/notification_popup/__pycache__
+ignis/modules/osd/__pycache__
+ignis/modules/power/__pycache__

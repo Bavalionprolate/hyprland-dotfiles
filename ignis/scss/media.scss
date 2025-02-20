@@ -1,0 +1,95 @@
+// WARNING: Do not import this file in style.scss
+
+$bg:  #00000050;
+$bg-light: #5a5a5a50;
+$bgb: #131313;
+$bgb-light: #222222;
+$fg: #dfdef0;
+$active: #ffffff;
+$unactive: #bbbbbb;
+$silver-transparent: rgba(105, 105, 105, 0.4);
+
+.media-{{ desktop_entry }} {
+    margin-top: 1rem;
+}
+
+.media-image-{{ desktop_entry }} {
+    background-image: url('file:///{{ art_url }}');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 7.5rem;
+    border-radius: 1.5rem;
+    border: 2px solid $bg-light;
+}
+
+.media-image-gradient-{{ desktop_entry }} {
+    border-radius: 1.3rem;
+    background-color: $bgb;
+    opacity: .5;
+}
+
+.media-scale-{{ desktop_entry }} trough,
+.media-scale-{{ desktop_entry }} trough highlight {
+    background-color: $bgb;
+    border-radius: 1rem;
+    min-height: .4rem;
+}
+
+.media-scale-{{ desktop_entry }} trough highlight {
+    background-color: $unactive;
+    border-radius: 0rem;
+}
+
+.media-scale-{{ desktop_entry }} slider {
+    background-color: $active;
+    border-radius: 1rem;
+    margin: -0.5rem -0.3rem;
+    padding: 0.5rem;
+}
+
+.media-title-{{ desktop_entry }} {
+    color: $active;
+}
+
+.media-artist-{{ desktop_entry }} {
+    color: $active;
+    font-weight: normal;
+}
+
+.media-content-{{ desktop_entry }} {
+    padding: 1rem;
+}
+
+.media-playback-button-{{ desktop_entry }} {
+    background-color: $bgb;
+    color: $active;
+    border-radius: 4rem;
+    min-width: 2.7rem;
+    min-height: 2.7rem;
+    transition: 0.3s;
+    border: 1px solid $silver-transparent;
+
+    &:hover {
+        background-color: $bgb-light;
+    }
+
+    &.playing {
+        border-radius: 1rem;
+    }
+}
+
+.media-player-icon-{{ desktop_entry }} {
+    color: $bgb;
+    font-size: 1.6rem;
+    padding: 1rem;
+    font-family: "JetBrains Mono Nerd Font";
+}
+
+.media-skip-button-{{ desktop_entry }} {
+    transition: 0.3s;
+    color: $active;
+    &:hover {
+        color: $active;
+    }
+}

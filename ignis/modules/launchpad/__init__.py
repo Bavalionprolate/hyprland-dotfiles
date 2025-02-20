@@ -3,19 +3,26 @@ from ignis.widgets import Widget
 from .app_item import LaunchpadAppItem
 from .search_button import SearchWebButton
 from .hidden_apps_manager import is_hidden
+from gi.repository import Gdk
 
 
 def launchpad() -> Widget.Window:
+    current_query = "" 
+
     def get_filtered_apps(query: str):
         if applications is None:
             return []
 
-        if query == "":
-            return [app for app in applications.apps if not is_hidden(app.id)]
-        else:
-            return applications.search(applications.apps, query)
+        apps = applications.apps if query == "" else applications.search(applications.apps, query)
+        
+        if query:
+            return apps
+        return [app for app in apps if not is_hidden(app.id)]
 
     def refresh_app_list(app_list: Widget.Grid, query: str = "") -> None:
+        nonlocal current_query
+        current_query = query
+
         apps = get_filtered_apps(query)
 
         if not apps and not query:
@@ -24,7 +31,7 @@ def launchpad() -> Widget.Window:
             app_list.child = [SearchWebButton(query)]
         else:
             app_list.visible = True
-            app_list.child = [LaunchpadAppItem(i, refresh_app_list) for i in apps]
+            app_list.child = [LaunchpadAppItem(i, lambda: refresh_app_list(app_list, current_query)) for i in apps]
 
     def search(entry: Widget.Entry, app_list: Widget.Grid) -> None:
         query = entry.text
@@ -34,9 +41,9 @@ def launchpad() -> Widget.Window:
         if not window.visible:
             return
 
-        entry.text = ""
+        entry.text = current_query
         entry.grab_focus()
-        refresh_app_list(app_list)
+        refresh_app_list(app_list, current_query)
 
     applications = ApplicationsService.get_default()
 
