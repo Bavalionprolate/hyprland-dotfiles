@@ -48,7 +48,7 @@ def launchpad() -> Widget.Window:
     applications = ApplicationsService.get_default()
 
     app_list = Widget.Grid(
-        child=Widget.Box(vertical=False, style="margin-top: 1rem;"),
+        child=Widget.Box(vertical=False),
         column_num=8,
     )
 

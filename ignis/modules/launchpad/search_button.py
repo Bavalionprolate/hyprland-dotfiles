@@ -35,7 +35,7 @@ class SearchWebButton(Widget.Button):
             label = "Visit " + query
             self._url = query
         else:
-            label = "Search in Google"
+            label = "Search in " + browser_desktop_file.replace(".desktop", "")
             self._url = f"https://www.google.com/search?q={query.replace(' ', '+')}"
 
         super().__init__(
