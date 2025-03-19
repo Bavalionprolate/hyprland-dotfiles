@@ -29,11 +29,6 @@
     }
 }
 
-.launcher_button{
-    padding-right: 5px;
-    font-size: 24px;
-}
-
 .workspaces {
     padding: 5px 5px;
     border-radius: 12px;
@@ -43,7 +38,7 @@
 }
 
 .workspace {
-    padding: 0px 15px;
+    min-width: 3.2rem;
     border-radius: 12px;
     background-color: rgba(255, 255, 255, 0.5);
     transition: all 0.3s ease-in-out;
@@ -52,20 +47,8 @@
 
 .workspace.active, .workspace:hover  {
     background-color: rgba(255, 255, 255, 0.5);
-    min-width: 25px;
     transition: all 0.3s ease-in-out;
     opacity:1.0;
-}
-
-.app-item{
-    padding: 5px 5px;
-    border-radius: 12px;
-    background-color: rgba(69, 69, 69, 0.20);
-    border: 1px solid $silver-transparent;
-}
-
-.app-item-label, .app-item-icon {
-    margin-left: 5px;
 }
 
 .tray-item {

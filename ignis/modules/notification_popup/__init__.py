@@ -50,7 +50,6 @@ def on_notified(box: Widget.Box, notification: Notification, monitor: int) -> No
     popup._outer.reveal_child = True
     Utils.Timeout(popup._outer.transition_duration, reveal_popup, box, popup)
 
-
 def reveal_popup(box: Widget.Box, popup: Popup) -> None:
     popup._inner.set_reveal_child(True)
     change_window_input_region(box)
@@ -66,7 +65,6 @@ def change_window_input_region(box: Widget.Box) -> None:
         window.input_height = height
 
     Utils.Timeout(ms=50, target=callback)
-
 
 def notification_popup(monitor: int) -> Widget.Window:
     notifications_box = Widget.Box(

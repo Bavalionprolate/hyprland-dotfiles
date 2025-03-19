@@ -5,7 +5,6 @@ from .hidden_apps_manager import hide_app, show_app, is_hidden
 
 app = IgnisApp.get_default()
 
-
 class LaunchpadAppItem(Widget.Button):
     def __init__(self, application, refresh_callback):
         self._application = application

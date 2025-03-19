@@ -5,16 +5,15 @@ from .search_button import SearchWebButton
 from .hidden_apps_manager import is_hidden
 from gi.repository import Gdk
 
-
 def launchpad() -> Widget.Window:
-    current_query = "" 
+    current_query = ""
 
     def get_filtered_apps(query: str):
         if applications is None:
             return []
 
         apps = applications.apps if query == "" else applications.search(applications.apps, query)
-        
+
         if query:
             return apps
         return [app for app in apps if not is_hidden(app.id)]

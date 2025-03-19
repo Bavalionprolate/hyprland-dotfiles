@@ -8,7 +8,6 @@ from .media import media
 
 app = IgnisApp.get_default()
 
-
 def control_center_widget() -> Widget.Box:
     return Widget.Box(
         vertical=True,

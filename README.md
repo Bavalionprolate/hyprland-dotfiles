@@ -23,7 +23,7 @@ cd hyprland-dotfiles
 
 ~~~
 paru -S ignis dart-sass ttf-jetbrains-mono-nerd slurp grim cmake meson cpio grimblast kitty xdg-desktop-portal-hyprland xdg-user-dirs telegram-desktop alsa-utils alsa-plugins alsa-lib playerctl imv
-wl-clipboard libnotify
+wl-clipboard libnotify mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon libva-mesa-driver libva-utils colloid-icon-theme-git bibata-cursor-theme papirus-icon-theme hyprpicker-git waypaper
 ~~~
 
 4. Move the `.config` directory to your home folder.
@@ -43,6 +43,4 @@ wl-clipboard libnotify
 
 
 sudo nano /etc/sudoers.d/v2raya
-
-
-
+xdg-mime default org.gnome.Nautilus.desktop inode/directory

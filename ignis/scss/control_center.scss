@@ -1,16 +1,15 @@
 .control-center {
     min-width: 28rem;
-    margin: .5rem;
+    margin: 0.5rem;
 }
 
 .control-center-widget {
-    padding: .85rem;
+    padding: 0.85rem;
     margin-bottom: 1rem;
     background-color: $bg;
-    border-radius : 1rem;
+    border-radius: 1rem;
     border: 1px solid $silver-transparent;
 }
-
 
 .qs-main-box {
     margin-top: 0.5rem;
@@ -22,15 +21,14 @@
     min-height: 2.2rem;
     border-radius: 1.2rem;
     transition: 0.3s;
-    padding: .2rem .8rem;
-    margin-right: .4rem;
+    padding: 0.2rem 0.8rem;
+    margin-right: 0.4rem;
     border: 1px solid $silver-transparent;
 
     &.active {
         @include hover($bg-light);
         color: $active;
     }
-
 }
 
 .qs-button-label {
@@ -52,15 +50,16 @@
     min-height: 1rem;
 }
 
-
 .volume-slider trough highlight {
     background-color: $unactive;
 }
 
-.volume-entry-list, .ethernet-network-list, .wifi-network-list {
+.volume-entry-list,
+.ethernet-network-list,
+.wifi-network-list {
     margin-top: 1rem;
     border-radius: 1rem;
-    margin: .2rem;
+    margin: 0.2rem;
     margin-top: 1rem;
     padding: 1rem;
     border: 1px solid $silver-transparent;
@@ -69,7 +68,7 @@
 
 .volume-entry {
     @include hover($bg-light);
-    margin-bottom: .8rem;
+    margin-bottom: 0.8rem;
     transition: 0.3s;
     border-radius: 1rem;
     padding: 0.5rem 0.5rem;
@@ -100,7 +99,8 @@
 }
 
 .user-name-box {
-    margin-left: 0.5rem;
+    margin-top: 0.4rem;
+    margin-left: 1rem;
 }
 
 .user-name {
@@ -139,7 +139,8 @@
     font-weight: normal;
 }
 
-.ethernet-header-box, .wifi-header-box {
+.ethernet-header-box,
+.wifi-header-box {
     margin-bottom: 0.5rem;
 }
 
@@ -152,7 +153,9 @@
     font-size: 1.35rem;
 }
 
-.ethernet-connection-item, .wifi-network-item, .vpn-connection-item {
+.ethernet-connection-item,
+.wifi-network-item,
+.vpn-connection-item {
     @include hover($bg-light);
     border: 1px solid $silver-transparent;
     transition: 0.3s;
@@ -161,8 +164,9 @@
     margin-top: 1rem;
 }
 
-
-.ethernet-connection-label, .wifi-network-label, .vpn-connection-label {
+.ethernet-connection-label,
+.wifi-network-label,
+.vpn-connection-label {
     margin-left: 0.5rem;
 }
 
@@ -172,13 +176,13 @@
 }
 
 .volume-entry-label {
-    margin-left: 0.5rem; 
+    margin-left: 0.5rem;
     margin-right: 1rem;
 }
 
 .notification-center {
     background-color: $bg;
-    padding: .85rem;
+    padding: 0.85rem;
     border-radius: 1rem;
     min-height: 22rem;
     border: 1px solid $silver-transparent;
@@ -194,11 +198,12 @@
     border: 1px solid $silver-transparent;
     border-radius: 1rem;
     padding: 1rem;
-    margin: .2rem;
+    margin: 0.2rem;
     margin-top: 1rem;
 }
 
-.notification-header-label, .notification-count {
+.notification-header-label,
+.notification-count {
     font-size: 1.1rem;
     margin-left: 0.5rem;
 }

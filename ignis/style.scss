@@ -3,7 +3,7 @@
     font-weight: bold;
 }
 
-$bg:  #00000050;
+$bg: #3f3f3f50;
 $bg-light: #5a5a5a50;
 $bgb: #131313;
 $bgb-light: #222222;
@@ -54,14 +54,21 @@ popover.menu {
 
         arrow {
             opacity: 0.3;
-            &:hover { background: none; }
-            &.left { -gtk-icon-source: -gtk-icontheme("go-previous-symbolic"); }
-            &.right { -gtk-icon-source: -gtk-icontheme("go-next-symbolic"); }
-          }
+            &:hover {
+                background: none;
+            }
+            &.left {
+                -gtk-icon-source: -gtk-icontheme("go-previous-symbolic");
+            }
+            &.right {
+                -gtk-icon-source: -gtk-icontheme("go-next-symbolic");
+            }
+        }
     }
 }
 
 @import "./scss/bar.scss";
+@import "./scss/dock.scss";
 @import "./scss/launchpad.scss";
 @import "./scss/osd.scss";
 @import "./scss/notification_popup.scss";
