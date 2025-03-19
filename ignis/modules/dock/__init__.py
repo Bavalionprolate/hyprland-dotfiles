@@ -228,7 +228,7 @@ class AppItem(Widget.Button):
         self.is_pinned = is_pinned
         icon = app.icon
         indicator = (
-            Widget.Label(label=".", css_classes=["app-item-indicator-start"])
+            Widget.Label(label="-", css_classes=["app-item-indicator-start"])
             if instances
             else Widget.Label(label="", css_classes=["app-item-indicator-start"])
         )
@@ -274,6 +274,11 @@ class AppItem(Widget.Button):
         else:
             logging.info(f"Запуск приложения {self.app.id}.")
             self.app.launch()
+
+    def close_all_instances(self):
+        for instance in self.instances:
+            addr = instance["address"]
+            close_window(addr)
 
     def on_drop_target_enter(self, drop_target, x, y):
         self.add_css_class("drop-target")
@@ -365,7 +370,7 @@ class AppItem(Widget.Button):
             menu_items.append(
                 Widget.MenuItem(
                     label="Close All",
-                    on_activate=lambda x: close_all_windows(self.app.id, self.dock_manager.monitor_id),
+                    on_activate=lambda x: self.close_all_instances(),
                 )
             )
         return Widget.PopoverMenu(items=menu_items)
@@ -392,18 +397,6 @@ def focus_window(address: str):
 
 def close_window(address: str):
     Utils.exec_sh_async(f"hyprctl dispatch closewindow address:{address}")
-
-def close_all_windows(app_id: str, monitor_id: int = 0):
-    running_clients = dock_manager.get_all_clients(monitor_id)
-    instances = [
-        client
-        for client in running_clients
-        if client.get("class", "").lower() == app_id.lower()
-    ]
-    for instance in instances:
-        address = instance["address"]
-        logging.info(f"Закрытие окна приложения {app_id} с адресом {address}.")
-        close_window(address)
 
 def launcher_button() -> Widget.Box:
     return Widget.Button(

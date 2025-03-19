@@ -12,6 +12,7 @@ from ignis.services.applications import Application
 from gi.repository import Gio
 from typing import Any
 
+
 from modules.bar.vpn_control import toggle_vpn, check_vpn_status
 
 audio = AudioService.get_default()
@@ -20,7 +21,7 @@ hyprland = HyprlandService.get_default()
 notifications = NotificationService.get_default()
 mpris = MprisService.get_default()
 
-from .toggle_control import toggle_control_center, read_state 
+from .toggle_control import toggle_control_center, read_state
 from modules.osd import OSD
 osd = OSD()
 
@@ -72,13 +73,24 @@ def workspace_add_button() -> Widget.Button:
         child=Widget.Label(label="+"),
     )
 
-def clock() -> Widget.Label:
-    return Widget.Label(
+def clock() -> Widget.Button:
+    return Widget.Button(
         css_classes=["clock"],
-        label=Utils.Poll(
-            1, lambda self: datetime.datetime.now().strftime("%h %d %H:%M")
-        ).bind("output"),
+        on_click=lambda x: toggle_calendar(),
+        child=Widget.Label(
+            label=Utils.Poll(
+                1, lambda self: datetime.datetime.now().strftime("%h %d %H:%M")
+            ).bind("output"),
+        ),
     )
+
+def toggle_calendar():
+    app = IgnisApp.get_default()
+    calendar_visible = app.get_window("ignis_CALENDAR").visible
+    if calendar_visible:
+        Utils.exec_sh_async("ignis close ignis_CALENDAR")
+    else:
+        Utils.exec_sh_async("ignis open ignis_CALENDAR")
 
 def kb_layout():
     hyprland = HyprlandService.get_default()
@@ -194,7 +206,7 @@ def left(monitor_id: int = 0) -> Widget.Box:
 def center(monitor_id: int = 0) -> Widget.Box:
     return Widget.Box(
         child=[
-            
+
         ],
         spacing=10,
     )
