@@ -1,0 +1,53 @@
+.dock {
+    padding: 0.4rem;
+    padding-bottom: 0;
+    background-color: $bg;
+    color: $active;
+    border-radius: 1.2rem;
+    margin: 0.5rem;
+    border: 1px solid $silver-transparent;
+}
+
+.left,
+.center,
+.right {
+    margin: 0.4rem;
+}
+
+.launcher-button-dock {
+    margin-bottom: 0.5rem;
+    margin-left: 0.6rem;
+    margin-right: 0.8rem;
+}
+
+.app-item-dock-button {
+    padding: 0.3rem 0.3rem;
+    border: 1px solid transparent;
+    border-radius: 1.2rem;
+}
+
+.app-item-dock-button:hover {
+    background-color: $bg;
+    border: 1px solid $silver-transparent;
+    transition: all 1s;
+}
+
+.app-item-indicator-start {
+    margin-top: -12px;
+}
+
+.dock-separator {
+    background-color: silver;
+    min-width: 2px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    border-radius: 5px;
+}
+
+.app-item-dock.drop-target .app-item-dock-button,
+.app-item-dock.drop-prohibited .app-item-dock-button {
+    background-color: $bg;
+    border-radius: 1.2rem;
+    border: 1px solid $silver-transparent;
+    transition: all 0.8s;
+}
