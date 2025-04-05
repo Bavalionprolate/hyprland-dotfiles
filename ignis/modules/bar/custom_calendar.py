@@ -24,13 +24,13 @@ class Calendar(Widget.Box):
                     homogeneous=True,
                     css_classes=["calendar-weekdays"],
                     child=[
-                        Widget.Label(label="Mo"),
-                        Widget.Label(label="Tu"),
-                        Widget.Label(label="We"),
-                        Widget.Label(label="Th"),
-                        Widget.Label(label="Fr"),
-                        Widget.Label(label="Sa"),
-                        Widget.Label(label="Su"),
+                        Widget.Label(label="Пн"),
+                        Widget.Label(label="Вт"),
+                        Widget.Label(label="Ср"),
+                        Widget.Label(label="Чт"),
+                        Widget.Label(label="Пт"),
+                        Widget.Label(label="Суб"),
+                        Widget.Label(label="Вс"),
                     ]
                 ),
                 self.days_grid
@@ -80,7 +80,7 @@ class Calendar(Widget.Box):
 
         # Добавляем пустые ячейки для выравнивания
         for _ in range(first_weekday):
-            grid_children.append(Widget.Label(label=""))
+            grid_children.append(Widget.Label(label="󰊓"))
 
         for day in range(1, days_in_month + 1):
             current_date = datetime.date(self.date.year, self.date.month, day)
@@ -99,6 +99,11 @@ class Calendar(Widget.Box):
                 day_button.add_css_class("selected")
 
             grid_children.append(day_button)
+
+        # Добавляем пустые ячейки в конец, чтобы заполнить 6 строк
+        total_cells = 6 * 7  # 6 строк по 7 дней
+        while len(grid_children) < total_cells:
+            grid_children.append(Widget.Label(label="󰊓"))
 
         self.days_grid.child = grid_children
 

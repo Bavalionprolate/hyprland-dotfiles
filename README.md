@@ -44,3 +44,9 @@ wl-clipboard libnotify mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon libva-m
 
 sudo nano /etc/sudoers.d/v2raya
 xdg-mime default org.gnome.Nautilus.desktop inode/directory
+
+
+добавил автоскрытие дока при перекрытии его приложениями с возможностью вызова и переключением режимов отображения дока.
+добавил календарь
+исправил ошибку с вызовом центра управления из-за модуля календаря
+добавил ограничение на количество символов в наименовании экземпляров приложений в меню дока

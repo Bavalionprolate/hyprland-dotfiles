@@ -15,7 +15,7 @@ from modules.dock import dock
 from modules.control_center import control_center
 from modules.notification_popup import notification_popup
 from modules.power import power
-from modules.bar.calendar import calendar_window
+from modules.bar.custom_calendar import calendar_window
 
 for monitor in range(Utils.get_n_monitors()):
     notification_popup(monitor)

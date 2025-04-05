@@ -15,9 +15,19 @@
 }
 
 .launcher-button-dock {
-    margin-bottom: 0.5rem;
+    margin-top: 0.4rem;
     margin-left: 0.6rem;
     margin-right: 1rem;
+}
+
+.launcher-button-dock popover.menu {
+    margin-bottom: 0.4rem;
+}
+
+.trash-button-dock {
+    margin-top: -0.4rem;
+    margin-left: 0.4rem;
+    padding: 0.3rem 0.3rem;
 }
 
 .app-item-dock-button {
@@ -46,8 +56,20 @@
 
 .app-item-dock.drop-target .app-item-dock-button,
 .app-item-dock.drop-prohibited .app-item-dock-button {
-    background-color: $bg;
-    border-radius: 1.2rem;
-    border: 1px solid $silver-transparent;
     transition: all 0.8s;
+}
+
+.app-item-dock {
+    transition:
+        transform 0.2s ease,
+        opacity 0.3s ease;
+}
+
+.app-item-dock.dragging {
+    opacity: 0.7;
+    transform: scale(1.1);
+}
+
+.app-item-dock.drop-target {
+    transform: translateY(-5px);
 }
