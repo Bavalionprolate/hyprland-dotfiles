@@ -1,33 +1,56 @@
 .control-center {
-    min-width: 28rem;
-    margin: 0.5rem;
+    min-width: 29rem;
+    border-left: 1px solid var(--theme-silver-transparent);
+    background-color: var(--theme-bg);
 }
 
 .control-center-widget {
     padding: 0.85rem;
-    margin-bottom: 1rem;
-    background-color: $bg;
+    border: 1px solid var(--theme-silver-transparent);
     border-radius: 1rem;
-    border: 1px solid $silver-transparent;
+    margin: 0.85rem 0.85rem 0 0.85rem;
+    background-color: var(--theme-bg);
 }
 
-.qs-main-box {
-    margin-top: 0.5rem;
+.control-center-switch {
+    min-width: 24px;
+    min-height: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    background-color: var(--theme-bg);
+    border: 1px solid var(--theme-silver-transparent);
+    transition: all 0.3s ease;
+    margin-right: 4px;
+
+    slider {
+        background-color: var(--theme-active);
+        padding: 0.01rem;
+        border-radius: 1rem;
+    }
+
+    &:checked {
+        background-color: var(--theme-bg-light);
+
+        slider {
+            background-color: var(--theme-active);
+        }
+    }
 }
 
 .qs-button {
-    @include hover($bg);
-    color: $active;
+    @include hover(var(--theme-bg));
+    color: var(--theme-active);
     min-height: 2.2rem;
     border-radius: 1.2rem;
-    transition: 0.3s;
     padding: 0.2rem 0.8rem;
     margin-right: 0.4rem;
-    border: 1px solid $silver-transparent;
+    margin-top: 0.4rem;
+    border: 1px solid var(--theme-silver-transparent);
 
     &.active {
-        @include hover($bg-light);
-        color: $active;
+        background-color: var(--theme-bg-light);
+        color: var(--theme-active);
     }
 }
 
@@ -35,23 +58,15 @@
     margin-left: 0.5rem;
 }
 
-.volume-slider {
-    all: unset;
-
-    * {
-        all: unset;
-    }
-}
-
 .volume-slider trough,
 .volume-slider trough highlight {
-    background-color: $bg;
+    background-color: var(--theme-bg);
     border-radius: 1rem;
     min-height: 1rem;
 }
 
 .volume-slider trough highlight {
-    background-color: $unactive;
+    background-color: var(--theme-unactive);
 }
 
 .volume-entry-list,
@@ -62,12 +77,13 @@
     margin: 0.2rem;
     margin-top: 1rem;
     padding: 1rem;
-    border: 1px solid $silver-transparent;
-    background: $bg-light;
+    border: 1px solid var(--theme-silver-transparent);
+    background: var(--theme-bg-light);
+    color: var(--theme-active);
 }
 
 .volume-entry {
-    @include hover($bg-light);
+    @include hover(var(--theme-bg-light));
     margin-bottom: 0.8rem;
     transition: 0.3s;
     border-radius: 1rem;
@@ -94,27 +110,25 @@
     margin-left: 0.5rem;
 }
 
-.user {
-    margin-top: 1rem;
-}
-
 .user-name-box {
     margin-top: 0.4rem;
-    margin-left: 1rem;
+    margin-bottom: 0.4rem;
 }
 
 .user-name {
-    font-size: 1rem;
-}
-
-.user-name-secondary {
-    color: $active;
+    color: var(--theme-active);
     font-size: 0.9rem;
 }
 
-.user-settings {
-    @include hover($bg-light);
-    color: $active;
+.user-name-secondary {
+    color: var(--theme-active);
+    font-size: 0.8rem;
+}
+
+.user-settings,
+.user-power {
+    @include hover(var(--theme-bg-light));
+    color: var(--theme-active);
     border-radius: 2rem;
     min-width: 2.35rem;
     margin: 0.4rem 0rem;
@@ -122,26 +136,10 @@
     transition: 0.3s;
 }
 
-.user-power {
-    @include hover($bg-light);
-    color: $active;
-    border-radius: 1.5rem;
-    min-width: 2.35rem;
-    margin: 0.4rem 0rem;
-    transition: 0.3s;
-}
-
-.header-clock {
-    font-size: 2.6rem;
-}
-
-.header-date {
-    font-weight: normal;
-}
-
 .ethernet-header-box,
 .wifi-header-box {
     margin-bottom: 0.5rem;
+    color: var(--theme-active);
 }
 
 .ethernet-header-label {
@@ -154,24 +152,23 @@
 }
 
 .ethernet-connection-item,
-.wifi-network-item,
-.vpn-connection-item {
-    @include hover($bg-light);
-    border: 1px solid $silver-transparent;
+.wifi-network-item {
+    @include hover(var(--theme-bg-light));
+    border: 1px solid var(--theme-silver-transparent);
     transition: 0.3s;
     border-radius: 1rem;
     padding: 0.5rem 0.5rem;
     margin-top: 1rem;
+    color: var(--theme-active);
 }
 
 .ethernet-connection-label,
-.wifi-network-label,
-.vpn-connection-label {
+.wifi-network-label {
     margin-left: 0.5rem;
 }
 
 .ethernet-connection-item-connect-label {
-    color: $active;
+    color: var(--theme-active);
     font-size: 1rem;
 }
 
@@ -180,12 +177,59 @@
     margin-right: 1rem;
 }
 
-.notification-center {
-    background-color: $bg;
-    padding: 0.85rem;
+.bluetooth-device-list {
+    margin-top: 1rem;
     border-radius: 1rem;
+    margin: 0.2rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--theme-silver-transparent);
+    background: var(--theme-bg-light);
+    color: var(--theme-active);
+}
+
+.bluetooth-header-box {
+    margin-bottom: 0.5rem;
+    color: var(--theme-active);
+}
+
+.bluetooth-header-label {
+    font-size: 1.35rem;
+}
+
+.bluetooth-device-item {
+    @include hover(var(--theme-bg-light));
+    border: 1px solid var(--theme-silver-transparent);
+    transition: 0.3s;
+    border-radius: 1rem;
+    padding: 0.5rem 0.5rem;
+    margin-top: 1rem;
+    color: var(--theme-active);
+}
+
+.bluetooth-device-label {
+    margin-left: 0.5rem;
+}
+
+calendar {
+    padding: 0.85rem;
+    color: var(--theme-active);
+    background-color: var(--theme-bg);
+    border: 1px solid var(--theme-silver-transparent);
+    border-radius: 1rem;
+    margin: 0 0.85rem 0.85rem 0.85rem;
+    min-height: 18rem;
+    font-size: 1rem;
+}
+
+.notification-center {
+    color: var(--theme-active);
+    background-color: var(--theme-bg);
+    border: 1px solid var(--theme-silver-transparent);
+    border-radius: 1rem;
+    margin: 0 0.85rem 0 0.85rem;
+    padding: 0.85rem;
     min-height: 22rem;
-    border: 1px solid $silver-transparent;
 }
 
 .notification-center-header {
@@ -193,9 +237,9 @@
 }
 
 .notification {
-    @include hover($bg-light);
+    @include hover(var(--theme-bg-light));
     transition: 0.3s;
-    border: 1px solid $silver-transparent;
+    border: 1px solid var(--theme-silver-transparent);
     border-radius: 1rem;
     padding: 1rem;
     margin: 0.2rem;
@@ -209,25 +253,25 @@
 }
 
 .notification-close {
-    @include hover($bg-light);
-    color: $active;
+    @include hover(var(--theme-bg-light));
+    color: var(--theme-active);
     border-radius: 1rem;
     padding: 0.2rem;
     margin-left: 0.5rem;
     transition: 0.3s;
-    border: 1px solid $silver-transparent;
+    border: 1px solid var(--theme-silver-transparent);
 }
 
 .notification-clear-all {
-    @include hover($bg-light);
+    @include hover(var(--theme-bg-light));
     transition: 0.3s;
     border-radius: 1rem;
     padding: 0.25rem 1rem;
 }
 
 .notification-action {
-    color: $active;
-    @include hover($bg-light);
+    color: var(--theme-active);
+    @include hover(var(--theme-bg-light));
     border-radius: 0.5rem;
     padding: 0.25rem 0.25rem;
     transition: 0.3s;
@@ -239,9 +283,9 @@
 }
 
 .notification-center-info-label {
-    color: $active;
+    color: var(--theme-active);
 }
 
 .notification-body {
-    color: $unactive;
+    color: var(--theme-unactive);
 }

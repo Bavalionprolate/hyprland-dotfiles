@@ -1,27 +1,29 @@
 .bar {
     padding: 0.4rem 1rem;
-    background-color: $bg;
-    color: $active;
-    border-bottom: 2px solid $silver-transparent;
+    background-color: var(--theme-bg);
+    color: var(--theme-active);
+    border-bottom: 2px solid var(--theme-silver-transparent);
 }
 
 .middle-separator {
-    background-color: gray;
+    background-color: var(--theme-unactive);
     padding: 0 0.03rem;
 }
 
 .volume-slider trough {
     min-width: 100px;
-    background-color: gray;
+    background-color: var(--theme-unactive);
     min-height: 0.3rem;
     border-radius: 1rem;
+    border: 1px solid var(--theme-silver-transparent);
 
     highlight {
-        background-color: $active;
+        background-color: var(--theme-active);
+        color: var(--theme-active);
     }
 
     slider {
-        background-color: $fg;
+        background-color: var(--theme-active);
         min-height: 15px;
         min-width: 15px;
         margin: -4px;
@@ -32,24 +34,27 @@
 .workspaces {
     padding: 5px 5px;
     border-radius: 12px;
-    background-color: rgba(69, 69, 69, 0.13);
-    border: 1px solid $silver-transparent;
+    background-color: var(--theme-bg);
+    border: 1px solid var(--theme-silver-transparent);
     min-height: 1.6rem;
 }
 
 .workspace {
-    min-width: 3.2rem;
+    padding: 0 1rem;
     border-radius: 12px;
-    background-color: rgba(255, 255, 255, 0.5);
-    transition: all 0.3s ease-in-out;
-    opacity: 0.4;
-}
+    border: 1px solid var(--theme-silver-transparent);
+    background-color: var(--theme-bg-light);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    opacity: 0.6;
 
-.workspace.active,
-.workspace:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-    transition: all 0.3s ease-in-out;
-    opacity: 1;
+    &:hover {
+        opacity: 1;
+    }
+    &.active {
+        background-color: var(--theme-bg-light);
+        padding: 0 1.6rem;
+        opacity: 1;
+    }
 }
 
 .tray-item {
@@ -59,84 +64,4 @@
 .clock {
     font-size: 1rem;
     margin-right: 0.5rem;
-}
-
-.vpn-button {
-    color: rgba(255, 255, 255, 0.5);
-    transition: color 0.3s ease;
-}
-
-.vpn-button.vpn-active {
-    color: $active;
-}
-
-.control-center-button {
-    padding-right: 0.5rem;
-    padding-top: 0.2rem;
-    font-size: 16px;
-}
-
-.calendar-window {
-    background-color: $bg;
-    border-radius: 1rem;
-    border: 1px solid $silver-transparent;
-    padding: 1rem;
-    margin: 0.5rem;
-}
-
-.calendar-widget {
-    min-width: 250px;
-    color: $active;
-}
-
-.calendar-header {
-    margin-bottom: 0.5rem;
-}
-
-.calendar-month-year {
-    font-size: 1.2rem;
-    margin: 0 1rem;
-}
-
-.calendar-nav-button {
-    padding: 0.2rem 0.6rem;
-    border-radius: 0.5rem;
-    transition: 0.3s;
-
-    &:hover {
-        background-color: $bg;
-    }
-}
-
-.calendar-weekdays {
-    margin-bottom: 0.5rem;
-
-    label {
-        padding: 0.3rem;
-        font-size: 0.9rem;
-        color: $unactive;
-    }
-}
-
-.calendar-days {
-    button {
-        padding: 0.5rem;
-        margin: 0.15rem;
-        border-radius: 0.3rem;
-        transition: all 0.2s;
-
-        &:hover {
-            background-color: $bg-light;
-        }
-
-        &.today {
-            background-color: lighten($bg, 10%);
-            border: 1px solid $active;
-        }
-
-        &.selected {
-            background-color: lighten($bg-light, 5%);
-            color: $active;
-        }
-    }
 }

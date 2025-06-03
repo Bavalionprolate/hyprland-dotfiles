@@ -1,19 +1,13 @@
-import datetime, os, json
+import datetime
 from ignis.widgets import Widget
 from ignis.utils import Utils
-from ignis.app import IgnisApp
 from ignis.services.audio import AudioService, Stream
 from ignis.services.system_tray import SystemTrayService, SystemTrayItem
 from ignis.services.hyprland import HyprlandService
 from ignis.services.notifications import NotificationService
-from ignis.services.mpris import MprisService, MprisPlayer
-from ignis.exceptions import HyprlandIPCNotFoundError
-from ignis.services.applications import Application
-from gi.repository import Gio
-from typing import Any
+from ignis.services.mpris import MprisService
 
-
-from modules.bar.vpn_control import toggle_vpn, check_vpn_status
+import asyncio
 
 audio = AudioService.get_default()
 system_tray = SystemTrayService.get_default()
@@ -21,62 +15,57 @@ hyprland = HyprlandService.get_default()
 notifications = NotificationService.get_default()
 mpris = MprisService.get_default()
 
-from .toggle_control import toggle_control_center, read_state
 from modules.osd import OSD
 osd = OSD()
 
 from functools import lru_cache
-from gi.repository import Gio
+from gi.repository import Gio, GLib
 
-def workspace_button(workspace: dict) -> Widget.Button:
+def workspace_button(workspace) -> Widget.Button:
     widget = Widget.Button(
         css_classes=["workspace"],
-        on_click=lambda x, id=workspace["id"]: hyprland.switch_to_workspace(id),
-        child=Widget.Label(label=str(workspace["id"])),
+        on_click=lambda x: workspace.switch_to(),
+        child=Widget.Label(label=str(workspace.id)),
     )
-    if workspace["id"] == hyprland.active_workspace["id"]:
+    if workspace.id == hyprland.active_workspace.id:
         widget.add_css_class("active")
 
     return widget
 
-
-def scroll_workspaces(direction: str, monitor_id: int) -> None:
-    current = hyprland.active_workspace["id"]
-    target = current + (-1 if direction == "up" else 1)
-
-    workspaces = [ws for ws in hyprland.workspaces if ws["monitorID"] == monitor_id]
-    workspace_ids = sorted([ws["id"] for ws in workspaces])
-
-    if target in workspace_ids:
+def scroll_workspaces(direction: str, monitor_name: str = "") -> None:
+    current = hyprland.active_workspace.id
+    if direction == "up":
+        target = current - 1
+        hyprland.switch_to_workspace(target)
+    else:
+        target = current + 1
+        if target == 11:
+            return
         hyprland.switch_to_workspace(target)
 
-
-def workspaces(monitor_id: int) -> Widget.EventBox:
+def workspaces(monitor_name: str) -> Widget.EventBox:
     return Widget.EventBox(
-        on_scroll_up=lambda x: scroll_workspaces("up", monitor_id),
-        on_scroll_down=lambda x: scroll_workspaces("down", monitor_id),
+        on_scroll_up=lambda x: scroll_workspaces("up"),
+        on_scroll_down=lambda x: scroll_workspaces("down"),
         css_classes=["workspaces"],
         spacing=5,
-        child=hyprland.bind(
-            "workspaces",
-            transform=lambda value: [
-                workspace_button(i)
-                for i in value
-                if i["monitorID"] == monitor_id
+        child=hyprland.bind_many(
+            ["workspaces", "active_workspace"],
+            transform=lambda workspaces, active_workspace: [
+                workspace_button(i) for i in workspaces
             ],
         ),
     )
 
 def workspace_add_button() -> Widget.Button:
     return Widget.Button(
-        on_click=lambda x: Utils.exec_sh_async("hyprctl dispatch workspace emptynm"),
+        on_click=lambda x: asyncio.create_task(Utils.exec_sh_async("hyprctl dispatch workspace emptynm")),
         child=Widget.Label(label="+"),
     )
 
 def clock() -> Widget.Button:
     return Widget.Button(
         css_classes=["clock"],
-        on_click=lambda x: toggle_calendar(),
         child=Widget.Label(
             label=Utils.Poll(
                 1, lambda self: datetime.datetime.now().strftime("%h %d %H:%M")
@@ -84,24 +73,10 @@ def clock() -> Widget.Button:
         ),
     )
 
-def toggle_calendar():
-    app = IgnisApp.get_default()
-    calendar_visible = app.get_window("ignis_CALENDAR").visible
-    if calendar_visible:
-        Utils.exec_sh_async("ignis close ignis_CALENDAR")
-    else:
-        Utils.exec_sh_async("ignis open ignis_CALENDAR")
-
 def kb_layout():
-    hyprland = HyprlandService.get_default()
-    return Widget.Button(
-        css_classes=["kb-layout"],
-        on_click=lambda x: hyprland.switch_kb_layout(),
-        child=Widget.Label(
-            label=hyprland.bind(
-                "kb_layout", transform=lambda value: value[:2].lower()
-            )
-        ),
+    return Widget.EventBox(
+        on_click=lambda self: hyprland.main_keyboard.switch_layout("next"),
+        child=[Widget.Label(label=hyprland.main_keyboard.bind("active_keymap"))],
     )
 
 def speaker_volume(stream: Stream) -> Widget.Button:
@@ -160,45 +135,17 @@ def speaker_slider() -> Widget.Scale:
         css_classes=["volume-slider"],
     )
 
-def vpn_button() -> Widget.Button:
-    button = Widget.Button(
-        css_classes=["vpn-button"],
-        on_click=lambda x: toggle_vpn() and update_button(button),
-        child=Widget.Label(label="VPN")
+def control_center_button(monitor_id) -> Widget.Switch:
+    return Widget.Switch(
+        on_change=lambda switch, active: asyncio.create_task(Utils.exec_sh_async(f"ignis toggle ignis_CONTROL_CENTER_{monitor_id}")),
+        css_classes=["control-center-switch"]
     )
-
-    def update_button(widget):
-        if check_vpn_status():
-            widget.add_css_class("vpn-active")
-        else:
-            widget.remove_css_class("vpn-active")
-
-    Utils.Poll(5, lambda _: update_button(button))
-
-    return button
-
-def control_center_button() -> Widget.Button:
-    button = Widget.Button(
-        css_classes=["control-center-button"],
-        on_click=lambda x: toggle_control_center(button),
-        child=Widget.Label(label="")
-    )
-
-    def update_button_status():
-        if read_state():
-            button.child.label = ""
-        else:
-            button.child.label = ""
-
-    Utils.Poll(5, lambda x: update_button_status())
-
-    return button
 
 def left(monitor_id: int = 0) -> Widget.Box:
     return Widget.Box(
         child=[
-            workspaces(monitor_id),
             workspace_add_button(),
+            workspaces(monitor_id)
         ],
         spacing=10,
     )
@@ -206,7 +153,6 @@ def left(monitor_id: int = 0) -> Widget.Box:
 def center(monitor_id: int = 0) -> Widget.Box:
     return Widget.Box(
         child=[
-
         ],
         spacing=10,
     )
@@ -215,9 +161,8 @@ def right(monitor_id: int = 0) -> Widget.Box:
     return Widget.Box(
         child=[
             tray(),
-            vpn_button(),
             kb_layout(),
-            control_center_button(),
+            control_center_button(monitor_id),
             speaker_volume(audio.speaker),
             speaker_slider(),
             clock()

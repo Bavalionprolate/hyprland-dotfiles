@@ -2,12 +2,14 @@ from ignis.widgets import Widget
 from ignis.utils import Utils
 from ignis.services.audio import AudioService, Stream
 from modules.bar import osd
+from gi.repository import Gtk
+
+import asyncio
 
 audio = AudioService.get_default()
 
-
 def volume_scale(stream: Stream) -> Widget.Scale:
-    return Widget.Scale(
+    scale =  Widget.Scale(
         css_classes=["volume-slider"],
         value=stream.bind("volume"),
         step=5,
@@ -19,6 +21,12 @@ def volume_scale(stream: Stream) -> Widget.Scale:
         sensitive=stream.bind("is_muted", lambda value: not value),
     )
 
+    for controller in scale.observe_controllers():
+        if isinstance(controller, Gtk.EventControllerScroll):
+            controller.set_flags(Gtk.EventControllerScrollFlags.NONE)
+            break
+
+    return scale
 
 def device_entry(stream: Stream, _type: str) -> Widget.Button:
     widget = Widget.Button(
@@ -47,7 +55,6 @@ def device_entry(stream: Stream, _type: str) -> Widget.Button:
     stream.connect("removed", lambda x: widget.unparent())
 
     return widget
-
 
 def device_list(header_label: str, header_icon: str, _type: str, **kwargs) -> Widget.Revealer:
     box = Widget.Box(
@@ -86,7 +93,7 @@ def device_list(header_label: str, header_icon: str, _type: str, **kwargs) -> Wi
                 ),
                 css_classes=["volume-entry"],
                 style="margin-bottom: 0;",
-                on_click=lambda x: Utils.exec_sh_async("pavucontrol"),
+                on_click=lambda x: asyncio.create_task(Utils.exec_sh_async("pavucontrol")),
             ),
         ],
         **kwargs,
@@ -95,7 +102,6 @@ def device_list(header_label: str, header_icon: str, _type: str, **kwargs) -> Wi
     return Widget.Revealer(
         child=box, transition_type="slide_down", transition_duration=300
     )
-
 
 def volume_icon(stream: Stream) -> Widget.Button:
     return Widget.Button(
@@ -106,7 +112,6 @@ def volume_icon(stream: Stream) -> Widget.Button:
         css_classes=["volume-icon"],
         on_click=lambda x: stream.set_is_muted(not stream.is_muted),
     )
-
 
 def device_list_arrow(device_list: Widget.Revealer) -> Widget.Button:
     return Widget.ArrowButton(

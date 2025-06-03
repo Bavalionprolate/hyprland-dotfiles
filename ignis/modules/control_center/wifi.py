@@ -3,21 +3,24 @@ from ignis.utils import Utils
 from .qs_button import QSButton
 from ignis.services.network import NetworkService, WifiAccessPoint, WifiDevice
 from typing import List
-from modules.bar.vpn_control import toggle_vpn
+
+import asyncio
 
 network = NetworkService.get_default()
 
-
 class WifiNetworkItem(Widget.Button):
     def __init__(self, access_point: WifiAccessPoint):
+        self.access_point = access_point
+
         super().__init__(
             css_classes=["wifi-network-item"],
-            on_click=lambda x: access_point.connect_to_graphical(),
+            on_click=lambda x: asyncio.create_task(self._handle_connection()),
             child=Widget.Box(
                 child=[
                     Widget.Icon(
                         image=access_point.bind(
-                            "strength", transform=lambda value: access_point.icon_name
+                            "strength",
+                            transform=lambda value: access_point.icon_name
                         ),
                     ),
                     Widget.Label(
@@ -35,6 +38,11 @@ class WifiNetworkItem(Widget.Button):
             ),
         )
 
+    async def _handle_connection(self):
+        if self.access_point.is_connected:
+            await self.access_point.disconnect_from()
+        else:
+            await self.access_point.connect_to_graphical()
 
 def wifi_qsbutton(device: WifiDevice) -> QSButton:
     networks_list = Widget.Revealer(
@@ -52,6 +60,7 @@ def wifi_qsbutton(device: WifiDevice) -> QSButton:
                             hexpand=True,
                             active=network.wifi.enabled,
                             on_change=lambda x, state: network.wifi.set_enabled(state),
+                            css_classes=["control-center-switch"]
                         ),
                     ],
                     css_classes=["toggle-box", "wifi-header-box"],
@@ -65,7 +74,7 @@ def wifi_qsbutton(device: WifiDevice) -> QSButton:
                 ),
                 Widget.Button(
                     css_classes=["wifi-network-item"],
-                    on_click=lambda x: Utils.exec_sh_async("nm-connection-editor"),
+                    on_click=lambda x: asyncio.create_task(Utils.exec_sh_async("nm-connection-editor")),
                     style="margin-bottom: 0;",
                     child=Widget.Box(
                         child=[
@@ -78,28 +87,13 @@ def wifi_qsbutton(device: WifiDevice) -> QSButton:
                         ]
                     ),
                 ),
-                Widget.Button(
-                    css_classes=["vpn-connection-item"],
-                    style="margin-bottom: 0;",
-                    on_click=lambda x: toggle_vpn(),
-                    child=Widget.Box(
-                        child=[
-                            Widget.Icon(image="network-vpn-symbolic"),
-                            Widget.Label(
-                                label="VPN",
-                                halign="start",
-                                css_classes=["vpn-connection-label"],
-                            ),
-                        ]
-                    ),
-                ),
             ],
         ),
     )
 
     def get_label(ssid: str) -> str:
         if ssid:
-            return ssid
+            return ssid[:10] + "..."
         else:
             return "Wi-Fi"
 
@@ -110,7 +104,7 @@ def wifi_qsbutton(device: WifiDevice) -> QSButton:
             return "network-wireless-symbolic"
 
     def toggle_list(x) -> None:
-        device.scan()
+        asyncio.create_task(device.scan())
         networks_list.toggle()
 
     return QSButton(
@@ -121,7 +115,6 @@ def wifi_qsbutton(device: WifiDevice) -> QSButton:
         active=network.wifi.bind("enabled"),
         content=networks_list,
     )
-
 
 def wifi_control() -> List[QSButton]:
     return [wifi_qsbutton(dev) for dev in network.wifi.devices]

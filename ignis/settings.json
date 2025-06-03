@@ -1,0 +1,50 @@
+{
+    "theme": {
+        "dark_mode": true,
+        "monitor_wallpapers": [
+            {
+                "0": "/home/bava/Pictures/Wallpapers/img1.akspic.ru-macbook-yabloko-operacionnaya_sistema-atmosfera-oblako-5120x2880.jpg"
+            },
+            {
+                "1": "/home/bava/Pictures/Wallpapers/thumb-1920-1330526.png"
+            }
+        ],
+        "wallpaper_dir": "/home/bava/Pictures/Wallpapers"
+    },
+    "apps": {
+        "pinned_apps": [
+            "org.gnome.Nautilus.desktop",
+            "google-chrome.desktop",
+            "kitty.desktop",
+            "yandex-music.desktop"
+        ],
+        "hidden_apps": [
+            "bssh.desktop",
+            "bvnc.desktop",
+            "avahi-discover.desktop",
+            "electron34.desktop",
+            "electron35.desktop"
+        ]
+    },
+    "notifications": {
+        "dnd": false,
+        "notification_sound": true
+    },
+    "dock": {
+        "auto_hide": true,
+        "icon_size": 44,
+        "animation_speed": 200
+    },
+    "launchpad": {
+        "columns": 7,
+        "rows": 3,
+        "grid_spacing_x": 160,
+        "grid_spacing_y": 140,
+        "margin": 140,
+        "app_size": 160,
+        "icon_size": 110,
+        "invert_scroll": true,
+        "page_scale_x": 0.8,
+        "page_scale_y": 1
+    }
+}

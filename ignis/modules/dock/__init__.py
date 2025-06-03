@@ -1,4 +1,3 @@
-
 from .dock import dock
 from .dock_manager import DockManager
 from .app_item import AppItem

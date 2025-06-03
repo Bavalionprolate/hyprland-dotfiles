@@ -1,66 +1,75 @@
 .launchpad {
-    background: #00000050;
+    background: var(--theme-bg);
 }
 
-.overview {
-    margin: 0;
-    border-radius: 0;
-    min-width: 155rem;
+.launchpad-search-container {
+    padding: 0.75rem 1rem;
+    background-color: var(--theme-bg);
+    border-radius: 1rem;
+    border: 2px solid var(--theme-bg-light);
+    min-width: 30rem;
+    margin: 4rem 2rem 2rem;
 }
 
 .launchpad-search {
     all: unset;
     min-width: 20rem;
+    margin-left: 0.5rem;
+    color: var(--theme-active);
 }
 
-.launchpad-search-box {
-    padding: 0.75rem 1rem;
-    background-color: $bg;
-    border-radius: 1rem;
-    border: 2px solid $bg-light;
-    min-width: 10rem;
-    margin-top: 8rem;
+.launchpad-search-icon {
+    color: var(--theme-active);
 }
 
 .launchpad-scroll {
-    margin-top: 5rem;
-    min-height: 68rem;
+    margin: 2rem 0;
 }
 
-.launchpad-app,
-.launchpad-app-search-box {
+.launchpad-scroll scrollbar {
+    background-color: transparent;
+    border: none;
+
+    slider {
+        min-width: 6px;
+        min-height: 6px;
+        border-radius: 3px;
+        background-color: var(--theme-bg-light);
+
+        &:hover {
+            min-width: 8px;
+            min-height: 8px;
+            background-color: var(--theme-active);
+        }
+    }
+}
+
+.launchpad-app {
     all: unset;
     border-radius: 1rem;
-    padding-top: 1.6rem;
-    padding-bottom: 1.6rem;
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-    margin: 3rem;
-    margin-top: 0.5rem;
-    transition: 0.3s;
+    padding: 10px;
+    transition: all 0.2s;
     border: 1px solid transparent;
 
     &:focus,
     &:hover {
-        background: $bg-light;
-        border: 1px solid silver;
+        background-color: var(--theme-bg-light);
+        border: 1px solid var(--theme-silver-transparent);
     }
 }
 
-.launchpad-app-search-box {
-    min-width: 145rem;
-    border: 1px solid silver;
-    background: $bg-light;
-}
-
-.launchpad-app-search {
-    margin-left: 64.5rem;
-}
-
 .launchpad-app-label {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    color: var(--theme-active);
 }
 
-.launchpad-app-label-search {
-    font-size: 1rem;
+.launchpad-app-icon {
+    margin-bottom: 6px;
+}
+
+.launchpad-empty-label {
+    color: var(--theme-active);
+    font-size: 1.2rem;
+    margin-top: 4rem;
 }

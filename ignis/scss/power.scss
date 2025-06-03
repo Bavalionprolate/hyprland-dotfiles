@@ -1,24 +1,22 @@
-.power-window{
-    background-color: $bg;
+.power-window {
+    background-color: var(--theme-bg);
 }
 
-.power-menu{
+.power-menu {
     padding: 1rem;
-    color: $fg;
+    color: var(--theme-fg);
 }
 
-.power-button{
-    background: $bg-light;
-    border: 1px solid transparent;
+.power-button {
+    background: var(--theme-bg-light);
+    border: 2px solid transparent;
     padding: 1rem;
-    border-radius: .5rem;
-
+    border-radius: 0.5rem;
+    transition: all 0.38s;
     min-width: 5.5rem;
 
     &:hover {
-        background: $bg-light;
-        border: 1px solid silver;
-        transition: all 0.38s;
+        background: var(--theme-bg-light);
+        border: 2px solid var(--theme-bg-light);
     }
-
-}   
+}

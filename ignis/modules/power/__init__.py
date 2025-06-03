@@ -1,9 +1,11 @@
 from ignis.widgets import Widget
 from ignis.utils import Utils
 from ignis.app import IgnisApp
+import asyncio
 
 app = IgnisApp.get_default()
 
+# Меню управления питанием и сеансом пользователя с основными системными действиями
 class PowerMenu(Widget.Box):
     def __init__(self):
         super().__init__(
@@ -29,6 +31,11 @@ class PowerMenu(Widget.Box):
                     action=self.sleep,
                 ),
                 self.create_button(
+                    label="Lock",
+                    icon_name="lock-symbolic",
+                    action=self.lock,
+                ),
+                self.create_button(
                     label="Log out",
                     icon_name="system-log-out",
                     action=self.log_out,
@@ -36,8 +43,8 @@ class PowerMenu(Widget.Box):
             ],
         )
 
+    # Создание кнопки действия с иконкой и текстом
     def create_button(self, label: str, icon_name: str, action: callable) -> Widget.Button:
-
         return Widget.Button(
             css_classes=["power-button"],
             on_click=lambda x: action(),
@@ -54,8 +61,7 @@ class PowerMenu(Widget.Box):
 
     def restart(self):
         try:
-            Utils.exec_sh_async("python ~/.config/ignis/modules/bar/toggle_control.py -close")
-            Utils.exec_sh_async("systemctl reboot")
+            asyncio.create_task(Utils.exec_sh_async("systemctl reboot"))
         except Exception as e:
             print(f"Error during restart: {e}")
         finally:
@@ -63,8 +69,7 @@ class PowerMenu(Widget.Box):
 
     def shutdown(self):
         try:
-            Utils.exec_sh_async("python ~/.config/ignis/modules/bar/toggle_control.py -close")
-            Utils.exec_sh_async("systemctl poweroff")
+           asyncio.create_task( Utils.exec_sh_async("systemctl poweroff"))
         except Exception as e:
             print(f"Error during shutdown: {e}")
         finally:
@@ -72,21 +77,29 @@ class PowerMenu(Widget.Box):
 
     def sleep(self):
         try:
-            Utils.exec_sh_async("systemctl suspend")
+           asyncio.create_task( Utils.exec_sh_async("systemctl suspend"))
         except Exception as e:
             print(f"Error during sleep: {e}")
+        finally:
+            app.close_window("ignis_POWER")
+
+    def lock(self):
+        try:
+            asyncio.create_task(Utils.exec_sh_async("hyprlock"))
+        except Exception as e:
+            print(f"Error during lock: {e}")
         finally:
             app.close_window("ignis_POWER")
 
     def log_out(self):
         try:
-            Utils.exec_sh_async("python ~/.config/ignis/modules/bar/toggle_control.py -close")
-            Utils.exec_sh_async("hyprctl dispatch exit")
+           asyncio.create_task(Utils.exec_sh_async("hyprctl dispatch exit"))
         except Exception as e:
             print(f"Error during sleep: {e}")
         finally:
             app.close_window("ignis_POWER")
 
+# Создание модального окна управления питанием с затемнением фона
 def power():
     return Widget.Window(
         namespace="ignis_POWER",

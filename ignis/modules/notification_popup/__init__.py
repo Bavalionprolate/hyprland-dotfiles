@@ -3,6 +3,7 @@ from ignis.app import IgnisApp
 from ignis.utils import Utils
 from ignis.services.notifications import Notification, NotificationService
 from ..control_center.notification_center import NotificationWidget
+from options import settings
 
 app = IgnisApp.get_default()
 notifications = NotificationService.get_default()
@@ -40,7 +41,7 @@ class Popup(Widget.Box):
 
 
 def on_notified(box: Widget.Box, notification: Notification, monitor: int) -> None:
-    window: Widget.Window = app.get_window("ignis_CONTROL_CENTER")
+    window: Widget.Window = app.get_window(f"ignis_CONTROL_CENTER_{monitor}")
     if window.visible and window.monitor == monitor:
         return
 
@@ -67,13 +68,31 @@ def change_window_input_region(box: Widget.Box) -> None:
     Utils.Timeout(ms=50, target=callback)
 
 def notification_popup(monitor: int) -> Widget.Window:
+    def handle_notification_or_dnd(self, notification=None) -> None:
+        # Close popup window if DND is enabled
+        if settings.notifications.dnd:
+            window = app.get_window(f"ignis_NOTIFICATION_POPUP_{monitor}")
+            if window:
+                window.visible = False
+            return
+
+        # Show notification if one was provided
+        if notification:
+            on_notified(self, notification, monitor)
+
     notifications_box = Widget.Box(
         vertical=True,
         valign="start",
-        setup=lambda self: notifications.connect(
-            "new_popup",
-            lambda x, notification: on_notified(self, notification, monitor),
-        ),
+        setup=lambda self: [
+            notifications.connect(
+                "new_popup",
+                lambda x, notification: handle_notification_or_dnd(self, notification),
+            ),
+            settings.notifications.connect_option(
+                "dnd",
+                lambda: handle_notification_or_dnd(self),
+            ),
+        ],
     )
 
     return Widget.Window(

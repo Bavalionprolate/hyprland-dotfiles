@@ -3,18 +3,18 @@ from ignis.widgets import Widget
 from ignis.utils import Utils
 from .qs_button import QSButton
 from ignis.services.network import NetworkService, EthernetDevice
-from modules.bar.vpn_control import toggle_vpn
+
+import asyncio
 
 network = NetworkService.get_default()
-
 
 class EthernetConnectionItem(Widget.Button):
     def __init__(self, device: EthernetDevice):
         super().__init__(
             css_classes=["ethernet-connection-item"],
-            on_click=lambda x: device.disconnect_from()
+            on_click=lambda x: asyncio.create_task(device.disconnect_from())
             if device.is_connected
-            else device.connect_to(),
+            else asyncio.create_task(device.connect_to()),
             child=Widget.Box(
                 child=[
                     Widget.Icon(image="network-wired-symbolic"),
@@ -69,7 +69,7 @@ def ethernet_control() -> List[QSButton]:
                 Widget.Button(
                     css_classes=["ethernet-connection-item"],
                     style="margin-bottom: 0;",
-                    on_click=lambda x: Utils.exec_sh_async("nm-connection-editor"),
+                    on_click=lambda x: asyncio.create_task(Utils.exec_sh_async("nm-connection-editor")),
                     child=Widget.Box(
                         child=[
                             Widget.Icon(image="preferences-system-symbolic"),
@@ -77,21 +77,6 @@ def ethernet_control() -> List[QSButton]:
                                 label="Network Settings",
                                 halign="start",
                                 css_classes=["ethernet-connection-label"],
-                            ),
-                        ]
-                    ),
-                ),
-                Widget.Button(
-                    css_classes=["vpn-connection-item"],
-                    style="margin-bottom: 0;",
-                    on_click=lambda x: toggle_vpn(),
-                    child=Widget.Box(
-                        child=[
-                            Widget.Icon(image="network-vpn-symbolic"),
-                            Widget.Label(
-                                label="VPN",
-                                halign="start",
-                                css_classes=["vpn-connection-label"],
                             ),
                         ]
                     ),

@@ -1,55 +1,55 @@
 * {
     all: unset;
     font-weight: bold;
+    transition:
+        background-color 300ms ease-in-out,
+        color 300ms ease-in-out,
+        border-color 300ms ease-in-out;
 }
 
-$bg: #3f3f3f50;
-$bg-light: #5a5a5a50;
-$bgb: #131313;
-$bgb-light: #222222;
-$fg: #dfdef0;
-$active: #ffffff;
-$unactive: #bbbbbb;
-$silver-transparent: rgba(105, 105, 105, 0.4);
+@import "./scss/theme_vars";
+@import "./scss/themes";
 
 @mixin window {
-    background-color: $bg;
+    background-color: var(--theme-bg);
     border-radius: 1rem;
-    border: 1px solid $bg-light;
+    border: 1px solid var(--theme-bg-light);
     padding: 1rem;
-    color: $fg;
+    color: var(--theme-fg);
     margin: 1rem;
 }
 
 @mixin hover($bg) {
-    background-color: $bg;
+    background-color: var(--theme-bg);
     &:hover {
-        background-color: lighten($bg, 5%);
+        background-color: var(--theme-bg-light);
     }
 }
 
 popover.menu {
     contents {
-        background-color: $bg;
+        background-color: var(--theme-bg);
         padding: 0.35rem;
         border-radius: 0.5rem;
-        border: 1px solid $silver-transparent;
+        border: 1px solid var(--theme-silver-transparent);
         modelbutton {
             transition: 0.3s;
             border-radius: 0.5rem;
             padding: 0.25rem 1rem;
-        }
-        modelbutton:hover {
-            background-color: mix($bg, $unactive, 80%);
+            color: var(--theme-fg);
+
+            &:hover {
+                background-color: var(--theme-bg-light);
+            }
         }
         separator {
-            background-color: mix($bg, $unactive, 90%);
+            background-color: var(--theme-silver-transparent);
             min-height: 0.1rem;
             margin: 0.5rem 0;
         }
 
         label:disabled {
-            color: $unactive;
+            color: var(--theme-unactive);
         }
 
         arrow {
@@ -74,3 +74,5 @@ popover.menu {
 @import "./scss/notification_popup.scss";
 @import "./scss/control_center.scss";
 @import "./scss/power.scss";
+@import "./scss/wallpaper_panel.scss";
+@import "./scss/media.scss";

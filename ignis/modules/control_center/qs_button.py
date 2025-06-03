@@ -1,14 +1,12 @@
 from ignis.widgets import Widget
-from gi.repository import GObject  # type: ignore
+from gi.repository import GObject
 from typing import Callable
-from ignis.gobject import Binding
-
 
 class QSButton(Widget.Button):
     def __init__(
         self,
-        label: str | Binding,
-        icon_name: str | Binding,
+        label: str,
+        icon_name: str,
         on_activate: Callable | None = None,
         on_deactivate: Callable | None = None,
         content: Widget.Revealer | None = None,
@@ -18,11 +16,13 @@ class QSButton(Widget.Button):
         self.on_deactivate = on_deactivate
         self._active = False
         self._content = content
+        self._icon = Widget.Icon(image=icon_name)
+        self._label = Widget.Label(label=label, css_classes=["qs-button-label"])
         super().__init__(
             child=Widget.Box(
                 child=[
-                    Widget.Icon(image=icon_name),
-                    Widget.Label(label=label, css_classes=["qs-button-label"]),
+                    self._icon,
+                    self._label,
                     Widget.Arrow(
                         halign="end",
                         hexpand=True,
@@ -47,17 +47,27 @@ class QSButton(Widget.Button):
             if self.on_activate:
                 self.on_activate(self)
 
+    def set_property(self, prop, value):
+        if prop == "label":
+            self._label.label = value
+        elif prop == "icon_name":
+            self._icon.image = value
+        elif prop == "active":
+            self._active = value
+            if value:
+                self.add_css_class("active")
+            else:
+                self.remove_css_class("active")
+        else:
+            super().set_property(prop, value)
+
     @GObject.Property
     def active(self) -> bool:
         return self._active
 
     @active.setter
     def active(self, value: bool) -> None:
-        self._active = value
-        if value:
-            self.add_css_class("active")
-        else:
-            self.remove_css_class("active")
+        self.set_property("active", value)
 
     @GObject.Property
     def content(self) -> Widget.Revealer | None:

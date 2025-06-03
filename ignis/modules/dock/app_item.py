@@ -1,40 +1,36 @@
 import textwrap
 from gi.repository import Gtk, GObject, Gdk, GdkPixbuf
 from ignis.widgets import Widget
+from options import settings
 from .utils import focus_window, close_window
 import logging
 import os
 
-icon_size = 44
-
 class AppItem(Widget.Button):
-    def __init__(
-        self,
-        app: "Application",
-        instances: list[dict],
-        is_pinned: bool,
-        dock_manager: "DockManager"
-    ):
+    def __init__(self, app: "Application", instances: list[dict], is_pinned: bool, dock_manager: "DockManager"):
         self.app = app
         self.instances = instances
         self.dock_manager = dock_manager
         self.is_pinned = is_pinned
         self.icon = app.icon
+        self.icon_size = settings.dock.icon_size
 
         indicator = (
             Widget.Label(label="-", css_classes=["app-item-indicator-start"])
             if instances
             else Widget.Label(label="", css_classes=["app-item-indicator-start"])
         )
+
         self.menu = self._build_menu()
         self.app.connect("pinned", lambda _: self._sync_menu())
         self.app.connect("unpinned", lambda _: self._sync_menu())
+
         super().__init__(
             child=Widget.Box(
                 child=[
                     Widget.Icon(
                         image=self.icon,
-                        pixel_size=45,
+                        pixel_size=self.icon_size,
                         css_classes=["app-item-dock-button"],
                     ),
                     indicator,
@@ -103,12 +99,28 @@ class AppItem(Widget.Button):
 
         icon_theme = Gtk.IconTheme.get_for_display(display)
 
-        icon_info = icon_theme.lookup_icon(self.icon, [], icon_size, 1, Gtk.TextDirection.NONE, 0)
-        file_path = icon_info.get_file().get_path()
-        if file_path and os.path.exists(file_path):
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(file_path, icon_size, icon_size)
-            texture = Gdk.Texture.new_for_pixbuf(pixbuf)
-            drag_source.set_icon(texture, 0, 0)
+        try:
+            icon_info = icon_theme.lookup_icon(
+                self.icon,
+                [],
+                self.icon_size,
+                1,
+                Gtk.TextDirection.NONE,
+                0
+            )
+
+            if icon_info:
+                file_path = icon_info.get_file().get_path()
+                if file_path and os.path.exists(file_path):
+                    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
+                        file_path,
+                        self.icon_size,
+                        self.icon_size
+                    )
+                    texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+                    drag_source.set_icon(texture, 0, 0)
+        except Exception as e:
+            logging.error(f"Error setting drag icon: {e}")
 
         self.show()
 
@@ -128,6 +140,20 @@ class AppItem(Widget.Button):
             self.dock_manager.swap_apps(dragged_index, target_index)
         return True
 
+    def pin_app(self):
+        if not settings.apps.is_pinned(self.app.id):
+            self.app.pin()
+            self.dock_manager.pin_app(self.app.id)
+            self.is_pinned = True
+            self._sync_menu()
+
+    def unpin_app(self):
+        if settings.apps.is_pinned(self.app.id):
+            self.app.unpin()
+            self.dock_manager.unpin_app(self.app.id)
+            self.is_pinned = False
+            self._sync_menu()
+
     def _build_menu(self) -> Widget.PopoverMenu:
         menu_items = [
             Widget.MenuItem(
@@ -143,20 +169,12 @@ class AppItem(Widget.Button):
                 )
             )
 
-        if self.app.is_pinned:
-            menu_items.append(
-                Widget.MenuItem(
-                    label="󰤰 Unpin",
-                    on_activate=lambda x: self.unpin_app(),
-                )
+        menu_items.append(
+            Widget.MenuItem(
+                label="󰤰 Unpin" if settings.apps.is_pinned(self.app.id) else "󰤱 Pin",
+                on_activate=lambda x: self.unpin_app() if settings.apps.is_pinned(self.app.id) else self.pin_app(),
             )
-        else:
-            menu_items.append(
-                Widget.MenuItem(
-                    label="󰤱 Pin",
-                    on_activate=lambda x: self.pin_app(),
-                )
-            )
+        )
 
         if self.instances:
             menu_items.append(Widget.Separator())
@@ -192,16 +210,6 @@ class AppItem(Widget.Button):
         menu = Widget.PopoverMenu(items=menu_items)
         menu.connect("notify::visible", lambda x, y: self.dock_manager.check_window_overlap())
         return menu
-
-    def pin_app(self):
-        self.app.pin()
-        self.is_pinned = True
-        self._sync_menu()
-
-    def unpin_app(self):
-        self.app.unpin()
-        self.is_pinned = False
-        self._sync_menu()
 
     def _sync_menu(self):
         if self.menu and self.menu.get_parent():

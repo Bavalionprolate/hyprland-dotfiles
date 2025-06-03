@@ -1,11 +1,13 @@
 from ignis.widgets import Widget
 from ignis.services.notifications import Notification, NotificationService
 from ignis.utils import Utils
-from gi.repository import GLib  # type: ignore
+from gi.repository import GLib
+
+import asyncio
 
 notifications = NotificationService.get_default()
 
-
+# Специальный макет для уведомлений о скриншотах с превью и кнопками действий
 class ScreenshotLayout(Widget.Box):
     def __init__(self, notification: Notification) -> None:
         super().__init__(
@@ -45,8 +47,10 @@ class ScreenshotLayout(Widget.Box):
                         Widget.Button(
                             child=Widget.Label(label="Open"),
                             css_classes=["notification-action"],
-                            on_click=lambda x: Utils.exec_sh_async(
-                                f"xdg-open {notification.icon if notification.icon else 'dialog-information-symbolic'}"
+                            on_click=lambda x: asyncio.create_task(
+                                Utils.exec_sh_async(
+                                    f"xdg-open {notification.icon if notification.icon else 'dialog-information-symbolic'}"
+                                )
                             ),
                         ),
                         Widget.Button(
@@ -59,7 +63,7 @@ class ScreenshotLayout(Widget.Box):
             ],
         )
 
-
+# Стандартный макет для обычных уведомлений с иконкой и текстом
 class NormalLayout(Widget.Box):
     def __init__(self, notification: Notification) -> None:
         super().__init__(
@@ -122,7 +126,7 @@ class NormalLayout(Widget.Box):
             ],
         )
 
-
+# Виджет уведомления с автоматическим выбором макета в зависимости от типа
 class NotificationWidget(Widget.Box):
     def __init__(self, notification: Notification) -> None:
         layout: NormalLayout | ScreenshotLayout
@@ -137,7 +141,7 @@ class NotificationWidget(Widget.Box):
             child=[layout],
         )
 
-
+# Всплывающее окно уведомления с анимацией появления
 class Popup(Widget.Revealer):
     def __init__(self, notification: Notification, **kwargs):
         widget = NotificationWidget(notification)
@@ -149,7 +153,6 @@ class Popup(Widget.Revealer):
         self.reveal_child = False
         Utils.Timeout(self.transition_duration, self.unparent)
 
-
 def loading_notif_label() -> Widget.Label:
     return Widget.Label(
         label="Loading notifications...",
@@ -157,7 +160,6 @@ def loading_notif_label() -> Widget.Label:
         vexpand=True,
         css_classes=["notification-center-info-label"],
     )
-
 
 def no_notifications_label() -> Widget.Label:
     return Widget.Label(
@@ -168,12 +170,10 @@ def no_notifications_label() -> Widget.Label:
         css_classes=["notification-center-info-label"],
     )
 
-
 def on_notified(box: Widget.Box, notification: Notification) -> None:
     notify = Popup(notification)
     box.prepend(notify)
     notify.reveal_child = True
-
 
 def load_notifications() -> list[Widget.Label | Popup]:
     widgets = []
@@ -181,7 +181,7 @@ def load_notifications() -> list[Widget.Label | Popup]:
         GLib.idle_add(lambda i=i: widgets.append(Popup(i, reveal_child=True)))
     return widgets
 
-
+# Формирование списка уведомлений с индикацией загрузки и обновлением в реальном времени
 def notification_list() -> Widget.Box:
     box = Widget.Box(
         vertical=True,
@@ -201,7 +201,7 @@ def notification_list() -> Widget.Box:
 
     return box
 
-
+# Центр уведомлений с заголовком, счетчиком и прокручиваемым списком
 def notification_center() -> Widget.Box:
     main_box = Widget.Box(
         vertical=True,

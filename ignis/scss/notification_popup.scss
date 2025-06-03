@@ -3,11 +3,11 @@
     min-width: 25rem;
 
     & .notification-close {
-        @include hover($bg);
+        @include hover(var(--theme-bg));
     }
 
     & .notification-action {
-        @include hover($bg-light);
+        @include hover(var(--theme-bg-light));
     }
 }
 

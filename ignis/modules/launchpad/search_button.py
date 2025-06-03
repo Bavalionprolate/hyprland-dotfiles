@@ -4,8 +4,9 @@ from gi.repository import Gio
 from ignis.app import IgnisApp
 from .utils import is_url
 
-app = IgnisApp.get_default()
+import asyncio
 
+app = IgnisApp.get_default()
 
 class SearchWebButton(Widget.Button):
     def __init__(self, query: str):
@@ -57,7 +58,7 @@ class SearchWebButton(Widget.Button):
 
     def launch(self) -> None:
         try:
-            Utils.exec_sh_async(f"xdg-open {self._url}")
+            asyncio.create_task(Utils.exec_sh_async(f"xdg-open {self._url}"))
             app.close_window("ignis_LAUNCHPAD")
         except Exception as e:
             print(f"Error launching browser: {e}")
